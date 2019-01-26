@@ -152,13 +152,5 @@ MonoBehaviour:
   slopeOffset: {x: 0, y: 0}
   climbingMovement: 0.15
   fallingMovement: 0.31
-  leftField:
-    origin: {x: 0, y: 0}
-    angle: 0
-    magnitude: 0.5
-    aperture: 126
-  rightField:
-    origin: {x: 0, y: 0}
-    angle: 180
-    magnitude: 0.5
-    aperture: 126
+  magnitude: 0.63
+  angleGrad: 115
