@@ -184,13 +184,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1592173571761046, guid: 6c026e87789b94d98b47b8cdf00114b0, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4539882655184190, guid: 6c026e87789b94d98b47b8cdf00114b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.94
+      value: 1.33
       objectReference: {fileID: 0}
     - target: {fileID: 4539882655184190, guid: 6c026e87789b94d98b47b8cdf00114b0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.75
+      value: -2.4
       objectReference: {fileID: 0}
     - target: {fileID: 4539882655184190, guid: 6c026e87789b94d98b47b8cdf00114b0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -216,63 +220,19 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 50136571135670056, guid: 6c026e87789b94d98b47b8cdf00114b0,
-        type: 3}
-      propertyPath: m_LinearDrag
-      value: 7.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 114172252080080122, guid: 6c026e87789b94d98b47b8cdf00114b0,
-        type: 3}
-      propertyPath: leftField.magnitude
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114172252080080122, guid: 6c026e87789b94d98b47b8cdf00114b0,
-        type: 3}
-      propertyPath: leftField.aperture
-      value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 114172252080080122, guid: 6c026e87789b94d98b47b8cdf00114b0,
-        type: 3}
-      propertyPath: leftField.angle
+    - target: {fileID: 4539882655184190, guid: 6c026e87789b94d98b47b8cdf00114b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114172252080080122, guid: 6c026e87789b94d98b47b8cdf00114b0,
-        type: 3}
-      propertyPath: leftField.origin.x
+    - target: {fileID: 4539882655184190, guid: 6c026e87789b94d98b47b8cdf00114b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114172252080080122, guid: 6c026e87789b94d98b47b8cdf00114b0,
-        type: 3}
-      propertyPath: leftField.origin.y
+    - target: {fileID: 4539882655184190, guid: 6c026e87789b94d98b47b8cdf00114b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114172252080080122, guid: 6c026e87789b94d98b47b8cdf00114b0,
-        type: 3}
-      propertyPath: rightField.angle
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 114172252080080122, guid: 6c026e87789b94d98b47b8cdf00114b0,
-        type: 3}
-      propertyPath: rightField.aperture
-      value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 114172252080080122, guid: 6c026e87789b94d98b47b8cdf00114b0,
-        type: 3}
-      propertyPath: rightField.magnitude
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114172252080080122, guid: 6c026e87789b94d98b47b8cdf00114b0,
-        type: 3}
-      propertyPath: fallingMovement
-      value: 0.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 114172252080080122, guid: 6c026e87789b94d98b47b8cdf00114b0,
-        type: 3}
-      propertyPath: slopeAngle
-      value: 62
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 70795082520446812, guid: 6c026e87789b94d98b47b8cdf00114b0, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c026e87789b94d98b47b8cdf00114b0, type: 3}
 --- !u!1 &254028189
 GameObject:

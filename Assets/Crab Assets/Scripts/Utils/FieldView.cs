@@ -20,8 +20,8 @@ public struct FieldView2D {
 
     public void Draw (Transform transform) {
         #if UNITY_EDITOR
-        int segments = 8;
         float half = aperture * 0.5f * Mathf.Deg2Rad;
+        float segments = 8f;
         float increment = 2f / (float)segments;
         float directionAngle = angle * Mathf.Deg2Rad;
 
@@ -48,6 +48,30 @@ public struct FieldView2D {
         float sigma = Mathf.Atan2 (v.y, v.x) * Mathf.Rad2Deg;
         float half = aperture * 0.5f;
         return angle - half < sigma && angle + half > sigma;
+    }
+
+    public Vector2 GetUp () {
+        float half = aperture * 0.5f * Mathf.Deg2Rad;
+        float segments = 8f;
+        float increment = 2f / (float)segments;
+        float directionAngle = angle * Mathf.Deg2Rad;
+
+            float alpha = directionAngle - half + (half * 0 * increment);
+            Vector2 point = new Vector2 (
+                Mathf.Cos (alpha),
+                Mathf.Sin (alpha)
+            ) * magnitude;
+        return point;
+    }
+    public Vector2 GetDown () {
+        float increment = 2f / 8f;
+        float half = aperture * 0.5f * Mathf.Deg2Rad;
+        float directionAngle = angle * Mathf.Deg2Rad;
+        float alpha = directionAngle - half + (half * 0 * increment);
+        return new Vector2 (
+            Mathf.Cos (alpha),
+            Mathf.Sin (alpha)
+        ) * magnitude;
     }
 
 }
