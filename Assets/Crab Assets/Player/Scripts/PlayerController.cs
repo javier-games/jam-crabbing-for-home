@@ -16,6 +16,9 @@ public class PlayerController: MonoBehaviour {
     [SerializeField]
     private CharacterAnimationcontroller animationController;
 
+    [SerializeField]
+    private GameMode gameMode;
+
     [Header ("Forward Parameters")]
     [SerializeField]
     protected float forwardSpeed = 2.15f;   //  Speed to move forward.
@@ -82,7 +85,7 @@ public class PlayerController: MonoBehaviour {
     private void Update () {
         UpdateHorizontalSense ();
         UpdateState ();
-        UpdateAnimateion ();
+        UpdateAnimation ();
     }
 
     //  Called each frame fixed. Used it for physics.
@@ -105,9 +108,20 @@ public class PlayerController: MonoBehaviour {
         rigidbody.velocity = new Vector2 (x, y);
     }
 
+    private void OnTriggerEnter2D (Collider2D other) {
+        if(gameMode == null) {
+            Debug.LogError ("Se te olvidó poner la referencia del GAMEMODE en el playercontroller! Pero no hay pedo ;)");
+            return;
+        }
+
+        if (other.tag == "Checkpoint") {
+            gameMode.SetCheckPoint (other.gameObject);
+        }
+    }
+
     //  Called to display gizmos.
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     private void OnDrawGizmos () {
 
         //  Drawing Slope.
@@ -137,6 +151,14 @@ public class PlayerController: MonoBehaviour {
             forwardSense = 0;
         if (Input.GetKeyUp (KeyCode.LeftArrow) && forwardSense < 0)
             forwardSense = 0;
+        if (Input.GetKeyDown (KeyCode.D))
+            forwardSense = 1;
+        if (Input.GetKeyDown (KeyCode.A))
+            forwardSense = -1;
+        if (Input.GetKeyUp (KeyCode.D) && forwardSense > 0)
+            forwardSense = 0;
+        if (Input.GetKeyUp (KeyCode.A) && forwardSense < 0)
+            forwardSense = 0;
 
         //  Applying Smooth.
         horizontalAxis = Mathf.SmoothDamp (
@@ -163,7 +185,7 @@ public class PlayerController: MonoBehaviour {
 
     }
 
-    private void UpdateAnimateion () {
+    private void UpdateAnimation () {
         if (laststate != state) {
             switch (state) {
                 case State.GROUNDED:
@@ -226,7 +248,8 @@ public class PlayerController: MonoBehaviour {
             color: Color.cyan
         );
         #endif
-        up = hit.collider != null;
+        if(hit.collider != null &&  hit.collider.tag != "Checkpoint")
+            up = hit.collider != null;
 
 
         hit = Physics2D.Raycast (
@@ -241,7 +264,8 @@ public class PlayerController: MonoBehaviour {
             color: Color.cyan
         );
         #endif
-        down = hit.collider != null;
+        if (hit.collider != null && hit.collider.tag != "Checkpoint")
+            down = hit.collider != null;
 
         return up || down;
     }
@@ -264,7 +288,8 @@ public class PlayerController: MonoBehaviour {
             color: Color.cyan
         );
         #endif
-        up = hit.collider != null;
+        if (hit.collider != null && hit.collider.tag != "Checkpoint")
+            up = hit.collider != null;
 
 
         hit = Physics2D.Raycast (
@@ -279,7 +304,8 @@ public class PlayerController: MonoBehaviour {
             color: Color.cyan
         );
         #endif
-        down = hit.collider != null;
+        if (hit.collider != null && hit.collider.tag != "Checkpoint")
+            down = hit.collider != null;
 
         return up || down;
     }
