@@ -56,6 +56,7 @@ public class CharacterAnimationcontroller : MonoBehaviour
                 //walk
             case 1:
                 playerAnimator.SetTrigger("Walk");
+                print("walking");
                 break;
                 // glide
             case 2:

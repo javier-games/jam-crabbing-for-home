@@ -1,20 +1,20 @@
 fileFormatVersion: 2
-guid: 504dddca22f152e498124ac77149f049
+guid: a6d90500d49bc554ba93e2859f8c1990
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Place holder_0
-    21300002: Place holder_1
-    21300004: Place holder_2
-    21300006: Place holder_3
-    21300008: Place holder_4
-    21300010: Place holder_5
-    21300012: Place holder_6
-    21300014: Place holder_7
-    21300016: Place holder_8
-    21300018: Place holder_9
-    21300020: Place holder_10
-    21300022: Place holder_11
-    21300024: Place holder_12
+    21300000: Tilemap sand_0
+    21300002: Tilemap sand_1
+    21300004: Tilemap sand_2
+    21300006: Tilemap sand_3
+    21300008: Tilemap sand_4
+    21300010: Tilemap sand_5
+    21300012: Tilemap sand_6
+    21300014: Tilemap sand_7
+    21300016: Tilemap sand_8
+    21300018: Tilemap sand_9
+    21300020: Tilemap sand_10
+    21300022: Tilemap sand_11
+    21300024: Tilemap sand_12
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -54,13 +54,13 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 0
-  spriteMeshType: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 250
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -76,7 +76,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -87,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Place holder_0
+      name: Tilemap sand_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,19 +105,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5349efb6be8cfd54b9fe04e49651a9d2
+      spriteID: f3e2e93bd15eb664285ab3cb03ec2d25
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Place holder_1
+      name: Tilemap sand_1
       rect:
         serializedVersion: 2
         x: 256
@@ -125,19 +125,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d9ef6aba92c44241b85028fad600497
+      spriteID: fc29de184eb354549b3e9c19d34ded8d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Place holder_2
+      name: Tilemap sand_2
       rect:
         serializedVersion: 2
         x: 512
@@ -145,19 +145,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 319f43d2e1eceab488798ae155d39ce8
+      spriteID: b2b0eaf5439ba0d4ab15f4e8d4000855
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Place holder_3
+      name: Tilemap sand_3
       rect:
         serializedVersion: 2
         x: 768
@@ -165,19 +165,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a055d457340e01245a7a740f4eabf4b2
+      spriteID: e727ac0becc18b14baee6f815bf76242
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Place holder_4
+      name: Tilemap sand_4
       rect:
         serializedVersion: 2
         x: 0
@@ -185,19 +185,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04ec4afa8478e994ea93bd0f2ce7d86f
+      spriteID: 409fd2a4a0fad2b42842b8bf9db12b84
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Place holder_5
+      name: Tilemap sand_5
       rect:
         serializedVersion: 2
         x: 256
@@ -205,19 +205,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ff6371351c0a9f34d971aa478611a342
+      spriteID: a6419494fcac376418b6f711eba782ee
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Place holder_6
+      name: Tilemap sand_6
       rect:
         serializedVersion: 2
         x: 512
@@ -225,19 +225,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a1c56c6c8bf70846b7203a43a50f1ae
+      spriteID: 7246542356666c64a832b8793cde4cc5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Place holder_7
+      name: Tilemap sand_7
       rect:
         serializedVersion: 2
         x: 768
@@ -245,19 +245,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d94ace00155e7b94491955d5515ec912
+      spriteID: 8a0a4014c04d97946906b9f2a0de9305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Place holder_8
+      name: Tilemap sand_8
       rect:
         serializedVersion: 2
         x: 0
@@ -265,19 +265,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f5ef267972ed70409d7b425da64e0e9
+      spriteID: 8c27fcf82421634429bd7f38396e31e8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Place holder_9
+      name: Tilemap sand_9
       rect:
         serializedVersion: 2
         x: 256
@@ -285,19 +285,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15b30f4b4534fe54aad4de8656ab36b4
+      spriteID: 4796842740c572f418f3430857718bfa
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Place holder_10
+      name: Tilemap sand_10
       rect:
         serializedVersion: 2
         x: 512
@@ -305,19 +305,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f14c15dd23df6ed4aa93365aafa2fc0f
+      spriteID: 91f040555724da94c847d6bff8cb4a3d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Place holder_11
+      name: Tilemap sand_11
       rect:
         serializedVersion: 2
         x: 768
@@ -325,19 +325,19 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d32408ae45e7eb4d9fdb015a517a7af
+      spriteID: bf8d05c7a0496a94f9e0c3c7b6c1839c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Place holder_12
+      name: Tilemap sand_12
       rect:
         serializedVersion: 2
         x: 0
@@ -345,13 +345,13 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28d8c6cd7559f744f86eb849f038a538
+      spriteID: ef5dfc883b3ce7549ae2b615c49f74a0
       vertices: []
       indices: 
       edges: []
@@ -359,7 +359,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 8ae5504a992e8904ea9ea44f674e955b
+    spriteID: f4f64794c3b4fbe49bde7e5c0eb19a4a
     vertices: []
     indices: 
     edges: []
