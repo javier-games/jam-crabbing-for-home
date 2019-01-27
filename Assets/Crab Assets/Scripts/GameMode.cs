@@ -34,6 +34,8 @@ public class GameMode: MonoBehaviour {
     public Coroutine startNakeTimer;
     public Coroutine startGrowthTimer;
 
+    public GameObject finalprefab;
+
 
     void Start () {
         player = GameObject.FindWithTag ("Player");
@@ -155,7 +157,7 @@ public class GameMode: MonoBehaviour {
     private void EndGame (bool winState) {
         if (!winState) {
             endgamePanel.SetActive (true);
-            endGameText.text = "Perdiste cabron!!!";
+            endGameText.text = "Perdiste!!!";
             StartCoroutine (FadeAnim ("outIn"));
         }
     }
@@ -165,8 +167,9 @@ public class GameMode: MonoBehaviour {
         Checkpoint check = overlappedCheckpoint.GetComponent<Checkpoint> ();
         if (check != null) {
             if (check.setLevel) {
-                Debug.Log ("the end");
 
+                StopAllCoroutines ();
+                Instantiate (finalprefab);
             }
 
         }
