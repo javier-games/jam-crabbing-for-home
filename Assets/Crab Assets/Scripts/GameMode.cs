@@ -7,7 +7,7 @@ public class GameMode: MonoBehaviour
 {
     public GameObject fadePanel;
     private Image fadeImage;
-    private GameObject currentCheckpoint;
+    public GameObject currentCheckpoint;
     public GameObject initialCheckpoint;
     public float timeLeft = 10.0f;
     public Slider timerUI;
