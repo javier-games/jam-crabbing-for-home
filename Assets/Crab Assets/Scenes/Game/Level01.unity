@@ -53104,12 +53104,12 @@ PrefabInstance:
     - target: {fileID: 5211168068823907289, guid: 77dd82513a4314778be15f9bac2a1df1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.48
+      value: 14.58
       objectReference: {fileID: 0}
     - target: {fileID: 5211168068823907289, guid: 77dd82513a4314778be15f9bac2a1df1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9
+      value: -2.15
       objectReference: {fileID: 0}
     - target: {fileID: 5211168068823907289, guid: 77dd82513a4314778be15f9bac2a1df1,
         type: 3}
@@ -53155,26 +53155,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 160794671480756678, guid: 77dd82513a4314778be15f9bac2a1df1,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.99
-      objectReference: {fileID: 0}
-    - target: {fileID: 2105695767476931305, guid: 77dd82513a4314778be15f9bac2a1df1,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: ab645a46d05f9e248b80e3b083a7527c, type: 2}
-    - target: {fileID: 2105695767476931305, guid: 77dd82513a4314778be15f9bac2a1df1,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1498265137
-      objectReference: {fileID: 0}
-    - target: {fileID: 2105695767476931305, guid: 77dd82513a4314778be15f9bac2a1df1,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77dd82513a4314778be15f9bac2a1df1, type: 3}
