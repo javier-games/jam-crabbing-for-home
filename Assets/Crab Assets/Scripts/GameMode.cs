@@ -143,4 +143,9 @@ public class GameMode: MonoBehaviour
     {
         StartGame();
     }
+
+    public void NewGameFromMenu()
+    {
+
+    }
 }
