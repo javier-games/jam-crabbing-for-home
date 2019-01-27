@@ -11,7 +11,8 @@ public class GameMode: MonoBehaviour
     public GameObject currentCheckpoint;
     public GameObject initialCheckpoint;
     public float timeLeft = 10.0f;
-    public Slider timerUI;
+    public Slider GrowtimerUI;
+    public Slider nakednessTimerUI;
     public GameObject endgamePanel;
     public Text endGameText;
     public GameObject backgroundPlane;
@@ -37,7 +38,7 @@ public class GameMode: MonoBehaviour
         initColor2 = BottomColors[currentColorInArray];
         backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color", initColor2);
 
-        timerUI.maxValue = timeLeft;
+        GrowtimerUI.maxValue = timeLeft;
         /*currentColorInArray++;
         StartCoroutine(ColorChange(currentColorInArray));*/
         StartGame();
@@ -45,21 +46,21 @@ public class GameMode: MonoBehaviour
     
     public void BeginTimer()
     {
-        StartCoroutine(StartTimer());
+        StartCoroutine(StartGrowTimer());
     }
 
-    public void StopTimer()
+    public void StopGrowthTimer()
     {
-        StopCoroutine(StartTimer());
+        StopCoroutine(StartGrowTimer());
     }
 
-    private IEnumerator StartTimer()
+    private IEnumerator StartGrowTimer()
     {
         currentTimerValue = timeLeft;
         while (currentTimerValue > 0)
         {
             //Debug.Log("Timer: " + currentTimerValue);
-            timerUI.value = currentTimerValue;
+            GrowtimerUI.value = currentTimerValue;
             yield return new WaitForSeconds(.01f);
             currentTimerValue -= .01f;
         }
@@ -150,9 +151,9 @@ public class GameMode: MonoBehaviour
         currentCheckpoint = overlappedCheckpoint;
         overlappedCheckpoint.GetComponent<CapsuleCollider2D>().enabled = false;
         currentColorInArray++;
-        StopCoroutine(StartTimer());
-        timerUI.maxValue = timeLeft;
-        timerUI.value = timeLeft;
+        StopCoroutine(StartGrowTimer());
+        GrowtimerUI.maxValue = timeLeft;
+        GrowtimerUI.value = timeLeft;
         BeginTimer();
         StartCoroutine(ColorChange(currentColorInArray));
     }
@@ -163,9 +164,9 @@ public class GameMode: MonoBehaviour
         fadePanel.SetActive(true);
         StartCoroutine(FadeAnim("inOut"));
         endgamePanel.SetActive(false);
-        StopCoroutine(StartTimer());
-        timerUI.maxValue = timeLeft;
-        timerUI.value = timeLeft;
+        StopCoroutine(StartGrowTimer());
+        GrowtimerUI.maxValue = timeLeft;
+        GrowtimerUI.value = timeLeft;
         BeginTimer();
     }
 
@@ -185,12 +186,12 @@ public class GameMode: MonoBehaviour
 
     public void GotCollectable()
     {
-        StopTimer();
+        StopGrowthTimer();
         currentTimerValue += 1;
         timeLeft = currentTimerValue;
         if (player.GetComponent<PlayerController>().HasShell==false)
         {
-            StartCoroutine(StartTimer());
+            StartCoroutine(StartGrowTimer());
         }
         else
         {
