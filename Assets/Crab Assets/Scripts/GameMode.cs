@@ -8,7 +8,7 @@ public class GameMode: MonoBehaviour
     public GameObject fadePanel;
     private Image fadeImage;
     private GameObject currentCheckpoint;
-    private GameObject initialCheckpoint;
+    public GameObject initialCheckpoint;
     public float timeLeft = 10.0f;
     public Slider timerUI;
     public GameObject endgamePanel;
@@ -114,7 +114,12 @@ public class GameMode: MonoBehaviour
     {
         fadePanel.SetActive(true);
         StartCoroutine(FadeAnim("inOut"));
-        currentCheckpoint = initialCheckpoint;
+        if(currentCheckpoint == null)
+            currentCheckpoint = initialCheckpoint;
+        else
+        {
+            RestartInCheckpoint();
+        }
     }
 
     private void EndGame(bool winState)
@@ -132,5 +137,10 @@ public class GameMode: MonoBehaviour
         currentCheckpoint = overlappedCheckpoint;
         currentColorInArray++;
         StartCoroutine(ColorChange(currentColorInArray));
+    }
+
+    public void RestartInCheckpoint()
+    {
+        StartGame();
     }
 }

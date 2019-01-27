@@ -116,12 +116,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8014209500399312237}
-        m_MethodName: 
+      - m_Target: {fileID: 8014209500399312234}
+        m_MethodName: RestartInCheckpoint
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -790,6 +790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadePanel: {fileID: 8014209499115470485}
+  initialCheckpoint: {fileID: 0}
   timeLeft: 10
   timerUI: {fileID: 8014209499028742410}
   endgamePanel: {fileID: 8014209499376590466}
@@ -806,6 +807,11 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0.9160185, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   colorTransitionTime: 3
+  currentColor: {r: 0, g: 0, b: 0, a: 0}
+  currentColor2: {r: 0, g: 0, b: 0, a: 0}
+  currentColorInArray: 0
+  initColor: {r: 0, g: 0, b: 0, a: 0}
+  initColor2: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &8014209500491152622
 GameObject:
   m_ObjectHideFlags: 0
