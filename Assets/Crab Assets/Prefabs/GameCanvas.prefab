@@ -1326,8 +1326,10 @@ MonoBehaviour:
   fadePanel: {fileID: 8014209499115470485}
   currentCheckpoint: {fileID: 0}
   initialCheckpoint: {fileID: 0}
-  timeLeft: 10
-  timerUI: {fileID: 8014209499028742410}
+  GrowthtimeLeft: 10
+  NakedtimeLeft: 10
+  GrowtimerUI: {fileID: 7555298108553842793}
+  nakednessTimerUI: {fileID: 4620491198298235829}
   endgamePanel: {fileID: 8014209499376590466}
   endGameText: {fileID: 8014209499194177521}
   backgroundPlane: {fileID: 0}
