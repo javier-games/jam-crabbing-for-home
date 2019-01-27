@@ -222,6 +222,9 @@ public class PlayerController: MonoBehaviour {
             }
             else if (handler.hasItem) {
                 handler.Drop ();
+                leftRay.hittedObject = null;
+                rightRay.hittedObject = null;
+                bottomRay.hittedObject = null;
                 if (canBeHurt)
                     gameMode.BeginTimer ();
             }

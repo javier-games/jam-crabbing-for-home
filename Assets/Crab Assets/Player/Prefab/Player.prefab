@@ -4865,6 +4865,7 @@ MonoBehaviour:
     magnitude: 0.4
     bulk: 0.5
     color: {r: 0, g: 0.7479334, b: 1, a: 1}
+    hittedObject: {fileID: 0}
   leftRay:
     origen: {x: 0, y: 0}
     offset: {x: 0, y: -0.05}
@@ -4872,10 +4873,11 @@ MonoBehaviour:
     magnitude: 0.4
     bulk: 0.5
     color: {r: 0, g: 0.7490196, b: 1, a: 1}
+    hittedObject: {fileID: 0}
   fallingMovement: 0.2
-  jumpForce: 15
-  extraForce: 15
-  maxJumpTime: 0.2
+  jumpForce: 4
+  extraForce: 2
+  maxJumpTime: 0.5
   bottomRay:
     origen: {x: 0, y: 0}
     offset: {x: 0, y: 0}
@@ -4883,6 +4885,7 @@ MonoBehaviour:
     magnitude: 0.6
     bulk: 0.4
     color: {r: 0.33962262, g: 0.12335349, b: 0.12335349, a: 1}
+    hittedObject: {fileID: 0}
   smoothRotation: 0.1
   growingFactor: 1.5
   growingDuration: 0.5
@@ -5042,6 +5045,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  canBeHurt: 0
 --- !u!114 &1987353644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5057,6 +5061,7 @@ MonoBehaviour:
   homeAnchor: {fileID: 72895992}
   homeAnchorFliped: {fileID: 1338935604}
   hasItem: 0
+  launchForce: 25
 --- !u!1 &2034841651763849469
 GameObject:
   m_ObjectHideFlags: 0

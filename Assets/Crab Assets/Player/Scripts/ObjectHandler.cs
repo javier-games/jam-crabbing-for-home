@@ -53,7 +53,7 @@ public class ObjectHandler : MonoBehaviour
         if (!hasItem)
             return;
         pickedObject.transform.parent = transform.parent;
-        StartCoroutine (Launch (1f, pickedObject));
+        StartCoroutine (Launch (0.1f, pickedObject));
         hasItem = false;
     }
 
@@ -71,11 +71,11 @@ public class ObjectHandler : MonoBehaviour
         Collider2D coll = pickedObject.GetComponent<Collider2D> ();
         coll.enabled = false;
 
-        rigid.AddForce ((Vector2.up + myRigid.velocity).normalized * launchForce, ForceMode2D.Impulse);
+        rigid.AddForce ((Vector2.up + 0.3f * myRigid.velocity).normalized * launchForce, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds (time);
-
         coll.enabled = true;
+        pickedObject = null;
     }
 
     IEnumerator DestroyPickable (float time, GameObject gameObj) {
