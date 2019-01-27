@@ -16,6 +16,7 @@ public class PlayerController: MonoBehaviour {
     [SerializeField]
     private CharacterAnimationcontroller animationController;
 
+
     [SerializeField]
     private GameMode gameMode;
 
@@ -50,21 +51,22 @@ public class PlayerController: MonoBehaviour {
     [SerializeField]
     protected float angleGrad = 45;
 
-    /*
-    [Header ("Collision Parameters")]
-    [SerializeField]
-    protected FieldView2D leftField;        //  Left Field View.
-    [SerializeField]
-    protected FieldView2D rightField;       //  Right Field View.*/
 
     private List<Collider2D> leftColliders; //  List of facing elements.
     private List<Collider2D> rightColliders;//  List of facing elements.
-
 
     bool facingLeft;
     bool facingRight;
 
     private State laststate = State.FOLLING;
+
+
+    [Header ("Rotation Speed")]
+    [SerializeField]
+    private float smoothRotation = 0.1f;
+    private Transform child;
+    private float angleRotationVelocity;
+    private float angleRotatioTarget;
 
     #endregion
 
@@ -79,6 +81,9 @@ public class PlayerController: MonoBehaviour {
         //  Initializing lists.
         leftColliders = new List<Collider2D> ();
         rightColliders = new List<Collider2D> ();
+
+        child = transform.GetChild (0);
+        
     }
 
     //  Called each frame.
@@ -106,6 +111,9 @@ public class PlayerController: MonoBehaviour {
 
         //  Applying movement.
         rigidbody.velocity = new Vector2 (x, y);
+
+        child.GetComponent<SpriteRenderer> ().flipX = horizontalAxis < 0;
+        child.eulerAngles = new Vector3 (0,0,Mathf.SmoothDampAngle(child.eulerAngles.z, angleRotatioTarget, ref angleRotationVelocity, smoothRotation));
     }
 
     private void OnTriggerEnter2D (Collider2D other) {
@@ -189,21 +197,28 @@ public class PlayerController: MonoBehaviour {
         if (laststate != state) {
             switch (state) {
                 case State.GROUNDED:
+
                     if(horizontalAxis > 0.01f && horizontalAxis < -0.01f)
                         animationController.PlayAnimation (1);
                     else
                         animationController.PlayAnimation (0);
+
+                    angleRotatioTarget = 0;
                 break;
 
                 case State.FOLLING:
                     animationController.PlayAnimation (2);
+                    angleRotatioTarget = 0;
                 break;
 
                 case State.CLIMBING:
-                if (horizontalAxis > 0.01f && horizontalAxis < -0.01f)
+                if (horizontalAxis > 0.01f && horizontalAxis < -0.01f) {
                     animationController.PlayAnimation (1);
+                    child.GetComponent<SpriteRenderer> ().flipY = true;
+                }
                 else
                     animationController.PlayAnimation (0);
+                angleRotatioTarget = horizontalAxis > 0 ? 90 : -90;
                 break;
             }
         }
