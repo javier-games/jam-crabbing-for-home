@@ -52,3 +52,6 @@ TagManager:
   - name: Playables
     uniqueID: 1498265137
     locked: 0
+  - name: Foreground
+    uniqueID: 2711094985
+    locked: 0
