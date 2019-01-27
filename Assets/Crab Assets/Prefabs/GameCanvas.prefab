@@ -386,8 +386,8 @@ RectTransform:
   m_Father: {fileID: 8014209500993727377}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.2}
-  m_AnchorMax: {x: 1, y: 0.8}
+  m_AnchorMin: {x: 0, y: 0.75}
+  m_AnchorMax: {x: 1, y: 0.95}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1424,6 +1424,8 @@ MonoBehaviour:
   currentColorInArray: 0
   initColor: {r: 0, g: 0, b: 0, a: 0}
   initColor2: {r: 0, g: 0, b: 0, a: 0}
+  neckednessPanel: {fileID: 0}
+  neckednessCanvasGroup: {fileID: 0}
 --- !u!1 &8014209500491152622
 GameObject:
   m_ObjectHideFlags: 0
