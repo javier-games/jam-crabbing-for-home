@@ -98,6 +98,8 @@ public class PlayerController: MonoBehaviour {
     protected Color hurtColor;
     [SerializeField]
     protected AnimationCurve hurtColorCurve;
+    [SerializeField]
+    protected bool canBeHurt;
 
 
     //  Inputs variables
@@ -189,13 +191,20 @@ public class PlayerController: MonoBehaviour {
         }
         if (Input.GetKeyDown (KeyCode.RightShift)) {
             if (!handler.hasItem) {
-                if (leftRay.hittedObject != null && leftRay.hittedObject.CompareTag ("Pickable"))
+                if (leftRay.hittedObject != null && leftRay.hittedObject.CompareTag ("Pickable")) {
                     handler.Pick (leftRay.hittedObject.transform);
-                else if (rightRay.hittedObject != null && rightRay.hittedObject.CompareTag ("Pickable"))
+                    //  gameMode.StopTimer();
+                }
+                else if (rightRay.hittedObject != null && rightRay.hittedObject.CompareTag ("Pickable")) {
                     handler.Pick (rightRay.hittedObject.transform);
+                    //  gameMode.StopTimer ()
+                }
             }
-            else if (handler.hasItem)
+            else if (handler.hasItem) {
                 handler.Drop ();
+                if (canBeHurt)
+                    gameMode.BeginTimer ();
+            }
         }
 
         if(test) {
@@ -355,6 +364,9 @@ public class PlayerController: MonoBehaviour {
     }
 
     public void Hurt (float t) {
+        if (!canBeHurt)
+            return;
+
         if (Camera.main != null) {
             CameraVibe cameraVibe = Camera.main.GetComponent<CameraVibe> ();
             if (cameraVibe != null) {
@@ -362,6 +374,10 @@ public class PlayerController: MonoBehaviour {
             }
         }
         render.color = Color.Lerp (Color.white, hurtColor, hurtColorCurve.Evaluate (t));
+    }
+
+    public void SetCanBeHurtable (bool canBeHurt) {
+        this.canBeHurt = canBeHurt;
     }
     #endregion
 
