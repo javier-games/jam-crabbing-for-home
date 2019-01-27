@@ -181,8 +181,13 @@ public class PlayerController: MonoBehaviour {
         }
 
         if(other.tag == "Collectable") {
-            //gameMode.Collectable ();
-            Destroy (other.gameObject);
+            try {
+                gameMode.GotCollectable ();
+            }
+            catch (System.Exception e) { Debug.LogWarning (e); }
+            other.transform.GetChild (0).GetComponent<SpriteRenderer> ().enabled = false;
+            other.transform.GetComponent<Collider2D>().enabled = false;
+            Destroy (other.gameObject, 5f);
         }
     }
 
@@ -361,7 +366,7 @@ public class PlayerController: MonoBehaviour {
         );
         #endif
 
-        return hit.collider == null;
+        return hit.collider == null && !hit.collider.CompareTag ("Collectable");
     }
 
     public void Kill () {

@@ -11,6 +11,9 @@ public class ObjectHandler : MonoBehaviour
     public bool hasItem = false;
     public static GameObject pickedObject;
     private SpriteRenderer[] sprites;
+
+    [SerializeField]
+    float launchForce;
    
 
 
@@ -54,7 +57,24 @@ public class ObjectHandler : MonoBehaviour
     }
 
     public void GrowingUp (float scale) {
-        Drop ();
+        if (!hasItem)
+            return;
+        pickedObject.transform.parent = transform.parent;
+        hasItem = false;
+        StartCoroutine (Launch(1f, pickedObject));
+    }
+
+    IEnumerator Launch(float time, GameObject gameObj) {
+        Rigidbody2D rigid = pickedObject.GetComponent<Rigidbody2D> ();
+
+        rigid.AddForce (Vector2.up * launchForce, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds (time);
+    }
+
+    IEnumerator DestroyPickable (float time, GameObject gameObj) {
+        yield return new WaitForSeconds (time);
+        Destroy (gameObj);
     }
 
     private void SetHome()
