@@ -18,11 +18,11 @@ public class GameMode: MonoBehaviour
     public Color[] BottomColors = new Color[4];
     public float colorTransitionTime = 3.0f;
     float currentTimerValue;
-    Color currentColor;
-    Color currentColor2;
-    int currentColorInArray = 0;
-    Color initColor;
-    Color initColor2;
+    public Color currentColor;
+    public Color currentColor2;
+    public int currentColorInArray = 0;
+    public Color initColor;
+    public Color initColor2;
 
 
     void Start()
@@ -31,10 +31,12 @@ public class GameMode: MonoBehaviour
         endgamePanel.SetActive(false);
         initColor = TopColors[currentColorInArray];
         backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color1", initColor);
+        initColor2 = BottomColors[currentColorInArray];
+        backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color", initColor2);
 
 
-        currentColorInArray++;
-        StartCoroutine(ColorChange(currentColorInArray));
+        /*currentColorInArray++;
+        StartCoroutine(ColorChange(currentColorInArray));*/
         StartGame();
     }
     
@@ -104,6 +106,8 @@ public class GameMode: MonoBehaviour
             backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color", currentColor2);
             yield return new WaitForSeconds(.01f);
         }
+        initColor = TopColors[toColor];
+        initColor2 = BottomColors[toColor];
     }
 
     private void StartGame()
