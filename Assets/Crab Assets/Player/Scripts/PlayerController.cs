@@ -176,7 +176,10 @@ public class PlayerController: MonoBehaviour {
         }
 
         if (other.tag == "Checkpoint") {
-            gameMode.SetCheckPoint (other.gameObject);
+            try {
+                gameMode.SetCheckPoint (other.gameObject);
+            }
+            catch (System.Exception e) { Debug.LogWarning (e); }
             other.GetComponent<SpriteRenderer>().sprite = other.GetComponent<Checkpoint>().usedTexture;
         }
 
@@ -366,7 +369,10 @@ public class PlayerController: MonoBehaviour {
         );
         #endif
 
-        return hit.collider == null && !hit.collider.CompareTag ("Collectable");
+        if (hit.collider != null)
+            return !hit.collider.CompareTag ("Collectable");
+        return true;
+
     }
 
     public void Kill () {

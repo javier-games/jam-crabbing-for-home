@@ -53,6 +53,7 @@ public class ObjectHandler : MonoBehaviour
         if (!hasItem)
             return;
         pickedObject.transform.parent = transform.parent;
+        StartCoroutine (Launch (1f, pickedObject));
         hasItem = false;
     }
 
@@ -60,16 +61,21 @@ public class ObjectHandler : MonoBehaviour
         if (!hasItem)
             return;
         pickedObject.transform.parent = transform.parent;
+        StartCoroutine (DestroyPickable (4f, pickedObject));
         hasItem = false;
-        StartCoroutine (Launch(1f, pickedObject));
     }
 
     IEnumerator Launch(float time, GameObject gameObj) {
+        Rigidbody2D myRigid = GetComponent<Rigidbody2D> ();
         Rigidbody2D rigid = pickedObject.GetComponent<Rigidbody2D> ();
+        Collider2D coll = pickedObject.GetComponent<Collider2D> ();
+        coll.enabled = false;
 
-        rigid.AddForce (Vector2.up * launchForce, ForceMode2D.Impulse);
+        rigid.AddForce ((Vector2.up + myRigid.velocity).normalized * launchForce, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds (time);
+
+        coll.enabled = true;
     }
 
     IEnumerator DestroyPickable (float time, GameObject gameObj) {
