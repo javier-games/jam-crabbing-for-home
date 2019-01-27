@@ -82,7 +82,6 @@ public class GameMode: MonoBehaviour {
     private IEnumerator StartGrowTimer () {
         currentGrowthTimerValue = GrowthtimeLeft;
         while (currentGrowthTimerValue > 0) {
-            Debug.Log ("Timer: " + currentGrowthTimerValue);
             GrowtimerUI.value = currentGrowthTimerValue;
             yield return new WaitForSeconds (.01f);
             currentGrowthTimerValue -= .01f;
@@ -198,8 +197,7 @@ public class GameMode: MonoBehaviour {
 
     public void GotCollectable () {
         StopGrowthTimer ();
-        currentGrowthTimerValue += 1;
-        GrowthtimeLeft = currentGrowthTimerValue;
+        currentGrowthTimerValue = GrowthtimeLeft;
         if (player.GetComponent<PlayerController> ().HasShell == false) {
             startGrowthTimer = StartCoroutine (StartGrowTimer ());
         }

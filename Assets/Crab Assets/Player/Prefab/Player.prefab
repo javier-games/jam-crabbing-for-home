@@ -4875,8 +4875,8 @@ MonoBehaviour:
     color: {r: 0, g: 0.7490196, b: 1, a: 1}
     hittedObject: {fileID: 0}
   fallingMovement: 0.2
-  jumpForce: 4
-  extraForce: 2
+  jumpForce: 5
+  extraForce: 3
   maxJumpTime: 0.5
   bottomRay:
     origen: {x: 0, y: 0}
@@ -4887,7 +4887,7 @@ MonoBehaviour:
     color: {r: 0.33962262, g: 0.12335349, b: 0.12335349, a: 1}
     hittedObject: {fileID: 0}
   smoothRotation: 0.1
-  growingFactor: 1.5
+  growingFactor: 1.1
   growingDuration: 0.5
   heightGrowingCurve:
     serializedVersion: 2
