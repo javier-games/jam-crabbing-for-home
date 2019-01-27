@@ -139,7 +139,7 @@ public class GameMode: MonoBehaviour
             ElapsedTime += Time.deltaTime;
             Color currentColor = Color.Lerp(initColor, TopColors[toColor], (ElapsedTime / colorTransitionTime));
             Color currentColor2 = Color.Lerp(initColor2, BottomColors[toColor], (ElapsedTime / colorTransitionTime));
-            Debug.Log(currentColor);
+            //Debug.Log(currentColor);
             backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color1", currentColor);
             backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color", currentColor2);
             yield return new WaitForSeconds(.01f);

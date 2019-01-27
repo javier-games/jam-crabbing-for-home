@@ -7,4 +7,6 @@ public class Checkpoint : MonoBehaviour{
     public string nextLevel;
     public bool setCanBeHurt;
     public bool deathZone;
+    public bool used = false;
+    public Sprite usedTexture;
 }

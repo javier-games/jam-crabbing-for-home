@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1833370697357386556}
   - component: {fileID: 1833370697357386557}
   - component: {fileID: 1833370697357386558}
+  - component: {fileID: 3026161153232295130}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Checkpoint
@@ -69,8 +70,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3aba5f77b54a749e781373928622936f, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: cad43c3934e86dd45bf8767eb9a45b23, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,6 +94,24 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1.15}
+  m_Offset: {x: 0.04, y: -0.09}
+  m_Size: {x: 2, y: 2.15}
   m_Direction: 0
+--- !u!114 &3026161153232295130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833370697357386559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87268826d2b674847939d38886811e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setLevel: 0
+  nextLevel: 
+  setCanBeHurt: 0
+  deathZone: 0
+  used: 0
+  usedTexture: {fileID: 21300000, guid: 5e5e8032852ef804f9b552738bde0e1c, type: 3}

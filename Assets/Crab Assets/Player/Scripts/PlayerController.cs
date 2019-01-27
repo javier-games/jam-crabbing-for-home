@@ -177,6 +177,7 @@ public class PlayerController: MonoBehaviour {
 
         if (other.tag == "Checkpoint") {
             gameMode.SetCheckPoint (other.gameObject);
+            other.GetComponent<SpriteRenderer>().sprite = other.GetComponent<Checkpoint>().usedTexture;
         }
 
         if(other.tag == "Collectable") {
