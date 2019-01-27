@@ -18,14 +18,14 @@ public class PlayerController: MonoBehaviour {
     // Prefab References
     private CharacterAnimationcontroller animationController;
     private new Rigidbody2D rigidbody;
-    private new Collider2D collider2D;     
+    private new Collider2D collider2D;
     private ObjectHandler handler;
     private Transform child;
     private SpriteRenderer render;
 
     //  Game References
     [SerializeField]
-    private GameMode gameMode;
+    public GameMode gameMode;
 
     //  Parameters for forward movement.
     [Header ("Forward Variables")]
@@ -92,7 +92,7 @@ public class PlayerController: MonoBehaviour {
     [Header ("Hurt Variables")]
     [SerializeField]
     private bool test;
-    [SerializeField, Range(0,1)]
+    [SerializeField, Range (0, 1)]
     private float testTransition;
     [SerializeField]
     protected Color hurtColor;
@@ -100,6 +100,8 @@ public class PlayerController: MonoBehaviour {
     protected AnimationCurve hurtColorCurve;
     [SerializeField]
     protected bool canBeHurt;
+
+    private bool firstTime = true;
 
 
     //  Inputs variables
@@ -153,8 +155,8 @@ public class PlayerController: MonoBehaviour {
 
         float y = rigidbody.velocity.y;
         //  Jumping Extra Effect.
-        if (state == State.JUMPING && jumpTime < maxJumpTime && Input.GetKey(KeyCode.Space)) {
-            float tanh = Mathf.Cos (jumpTime/maxJumpTime);
+        if (state == State.JUMPING && jumpTime < maxJumpTime && Input.GetKey (KeyCode.Space)) {
+            float tanh = Mathf.Cos (jumpTime / maxJumpTime);
             y += extraForce * tanh;
         }
         //  Climbing Effect.
@@ -177,21 +179,24 @@ public class PlayerController: MonoBehaviour {
 
         if (other.tag == "Checkpoint") {
             try {
-                gameMode.SetCheckPoint (other.gameObject);
+                if (!other.GetComponent<Checkpoint> ().used) {
+                    gameMode.SetCheckPoint (other.gameObject);
+                    other.GetComponent<Checkpoint> ().used = true;
+                }
             }
             catch (System.Exception e) { Debug.LogWarning (e); }
             SpriteRenderer render = other.GetComponent<SpriteRenderer> ();
-            if(render != null)
-            render.sprite = other.GetComponent<Checkpoint>().usedTexture;
+            if (render != null)
+                render.sprite = other.GetComponent<Checkpoint> ().usedTexture;
         }
 
-        if(other.tag == "Collectable") {
+        if (other.tag == "Collectable") {
             try {
                 gameMode.GotCollectable ();
             }
             catch (System.Exception e) { Debug.LogWarning (e); }
             other.transform.GetChild (0).GetComponent<SpriteRenderer> ().enabled = false;
-            other.transform.GetComponent<Collider2D>().enabled = false;
+            other.transform.GetComponent<Collider2D> ().enabled = false;
             Destroy (other.gameObject, 5f);
         }
     }
@@ -205,13 +210,7 @@ public class PlayerController: MonoBehaviour {
         jumpButton = Input.GetKeyDown (KeyCode.Space);
         fireButton = Input.GetKeyDown (KeyCode.RightShift);
 
-        if (Input.GetKeyDown (KeyCode.P)) {
-               GrowUp ();
-        }
-        if (Input.GetKeyDown (KeyCode.O)) {
-            Kill ();
-        }
-        if (Input.GetKeyDown (KeyCode.RightShift)) {
+        if (Input.GetKeyDown (KeyCode.Q)) {
             if (!handler.hasItem) {
                 if (leftRay.hittedObject != null && leftRay.hittedObject.CompareTag ("Pickable")) {
                     handler.Pick (leftRay.hittedObject.transform);
@@ -223,16 +222,20 @@ public class PlayerController: MonoBehaviour {
                 }
             }
             else if (handler.hasItem) {
+                canBeHurt = true;
                 handler.Drop ();
                 leftRay.hittedObject = null;
                 rightRay.hittedObject = null;
                 bottomRay.hittedObject = null;
-                if (canBeHurt)
+
+                if (firstTime) {
                     gameMode.BeginTimer ();
+                    firstTime = false;
+                }
             }
         }
 
-        if(test) {
+        if (test) {
             Hurt (testTransition);
         }
     }
@@ -254,7 +257,7 @@ public class PlayerController: MonoBehaviour {
             jumpTime = 0;
         }
 
-        if(
+        if (
             state != State.JUMPING &&
             (state == State.WALKING || state == State.IDLE) &&
             jumpButton && !handler.hasItem
@@ -274,7 +277,7 @@ public class PlayerController: MonoBehaviour {
             (state == State.IDLE || state == State.WALKING) &&
             (facingLeft && CanClimb (-1) ||
             facingRight && CanClimb (1)) &&
-            (Mathf.Abs(horizontalAxis) > 0 && rigidbody.velocity.x < 0.1f)
+            (Mathf.Abs (horizontalAxis) > 0 && rigidbody.velocity.x < 0.1f)
         )
             state = State.CLIMBING;
 
@@ -311,9 +314,9 @@ public class PlayerController: MonoBehaviour {
             }
             break;
             case State.DYING:
-                animationController.PlayAnimation (4);
-                angleRotatioTarget = 0;
-                state = State.DEAD;
+            animationController.PlayAnimation (4);
+            angleRotatioTarget = 0;
+            state = State.DEAD;
             break;
         }
 
@@ -364,7 +367,7 @@ public class PlayerController: MonoBehaviour {
             distance: slopeDistance * mult
         );
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         Debug.DrawRay (
             start: transform.TransformPoint (slopeOffset),
             dir: new Vector2 (
@@ -372,7 +375,7 @@ public class PlayerController: MonoBehaviour {
                 y: Mathf.Sin (slopeRad)).normalized * slopeDistance * mult,
             color: Color.magenta
         );
-        #endif
+#endif
 
         if (hit.collider != null)
             return !hit.collider.CompareTag ("Collectable") && !hit.collider.CompareTag ("Checkpoint");
@@ -389,7 +392,7 @@ public class PlayerController: MonoBehaviour {
         growingTime = 0;
         originalScale = transform.localScale;
         if (growUp != null)
-            growUp.Invoke((transform.localScale.x + transform.localScale.y) * 0.5f);
+            growUp.Invoke ((transform.localScale.x + transform.localScale.y) * 0.5f);
     }
 
     public void Hurt (float t) {
@@ -426,7 +429,7 @@ public class PlayerController: MonoBehaviour {
     }
 
     [System.Serializable]
-    private struct MegaRay{
+    private struct MegaRay {
 
         public Vector2 origen;
         public Vector2 offset;
@@ -451,7 +454,7 @@ public class PlayerController: MonoBehaviour {
                 mult: mult
             ).collider;
 
-            if (collider != null && !collider.CompareTag("Collectable") && !collider.CompareTag ("Checkpoint") ) {
+            if (collider != null && !collider.CompareTag ("Collectable") && !collider.CompareTag ("Checkpoint")) {
                 hittedObject = collider.gameObject;
                 return true;
             }
@@ -483,13 +486,13 @@ public class PlayerController: MonoBehaviour {
 
         private RaycastHit2D GetHit (Vector2 origin, Vector2 dir, float mult) {
 
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             Debug.DrawRay (
                 start: origin + offset,
                 dir: dir.normalized * magnitude * mult,
                 color: color
             );
-            #endif
+#endif
 
             return Physics2D.Raycast (
                 origin: origin + offset,

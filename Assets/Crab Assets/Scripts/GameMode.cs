@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameMode: MonoBehaviour
-{
+public class GameMode: MonoBehaviour {
     public GameObject player;
     public GameObject fadePanel;
     private Image fadeImage;
@@ -32,196 +31,179 @@ public class GameMode: MonoBehaviour
     public Image neckednessPanel;
     public CanvasGroup neckednessCanvasGroup;
 
+    public Coroutine startNakeTimer;
+    public Coroutine startGrowthTimer;
 
-    void Start()
-    {
-        player = GameObject.FindWithTag("Player");
-        fadeImage = fadePanel.GetComponent<Image>();
-        endgamePanel.SetActive(false);
+
+    void Start () {
+        player = GameObject.FindWithTag ("Player");
+        fadeImage = fadePanel.GetComponent<Image> ();
+        endgamePanel.SetActive (false);
         initColor = TopColors[currentColorInArray];
-        backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color1", initColor);
+        backgroundPlane.GetComponent<Renderer> ().material.SetColor ("_Color1", initColor);
         initColor2 = BottomColors[currentColorInArray];
-        backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color", initColor2);
+        backgroundPlane.GetComponent<Renderer> ().material.SetColor ("_Color", initColor2);
 
         GrowtimerUI.maxValue = GrowthtimeLeft;
         /*currentColorInArray++;
         StartCoroutine(ColorChange(currentColorInArray));*/
-        StartGame();
-    }
-    
-    public void BeginTimer()
-    {
-        StartCoroutine(StartGrowTimer());
-        //StartCoroutine(StartNakedTimer());
+        StartGame ();
     }
 
-    public void StopNakednessTimer()
-    {
-        StopCoroutine(StartNakedTimer());
+    public void BeginTimer () {
+        startGrowthTimer = StartCoroutine (StartGrowTimer ());
+    }
+    public void BeginTimerNekedness () {
+        startNakeTimer = StartCoroutine (StartNakedTimer ());
     }
 
-    public void StopGrowthTimer()
-    {
-        StopCoroutine(StartGrowTimer());
+    public void StopNakednessTimer () {
+        if (startNakeTimer != null)
+            StopCoroutine (startNakeTimer);
     }
 
-    private IEnumerator StartNakedTimer()
-    {
+    public void StopGrowthTimer () {
+        StopCoroutine (startGrowthTimer);
+    }
+
+    private IEnumerator StartNakedTimer () {
         currentNakedTimerValue = NakedtimeLeft;
-        while (currentNakedTimerValue > 0)
-        {
-            //Debug.Log("Timer: " + currentTimerValue);
-            GrowtimerUI.value = currentNakedTimerValue;
-            yield return new WaitForSeconds(.01f);
+        while (currentNakedTimerValue > 0) {
+            //Debug.Log("Timer: " + currentNakedTimerValue);
+            nakednessTimerUI.fillAmount = 1 - currentNakedTimerValue / NakedtimeLeft;
+            yield return new WaitForSeconds (.01f);
             currentNakedTimerValue -= .01f;
         }
-        if (currentNakedTimerValue <= 0)
-        {
-            EndGame(false);
+        if (currentNakedTimerValue <= 0) {
+            EndGame (false);
         }
     }
 
-    private IEnumerator StartGrowTimer()
-    {
+    private IEnumerator StartGrowTimer () {
         currentGrowthTimerValue = GrowthtimeLeft;
-        while (currentGrowthTimerValue > 0)
-        {
-            //Debug.Log("Timer: " + currentTimerValue);
+        while (currentGrowthTimerValue > 0) {
+            Debug.Log ("Timer: " + currentGrowthTimerValue);
             GrowtimerUI.value = currentGrowthTimerValue;
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds (.01f);
             currentGrowthTimerValue -= .01f;
         }
-        if (currentGrowthTimerValue <= 0)
-        {
-            EndGame(false);
+        if (currentGrowthTimerValue <= 0) {
+            player.GetComponent<PlayerController> ().GrowUp ();
+            StopGrowthTimer ();
+            startGrowthTimer = StartCoroutine (StartGrowTimer ());
+
         }
     }
 
-    private IEnumerator FadeAnim(string Direction)
-    {
+    private IEnumerator FadeAnim (string Direction) {
         float initAlpha;
         float endAlpha;
         Color imageAlpha = fadeImage.color; ;
-        switch (Direction)
-        {
+        switch (Direction) {
             case "inOut":
-                initAlpha = 1.0f;
-                endAlpha = 0;
-                while (initAlpha > endAlpha)
-                {
-                    initAlpha -= 0.01f;
-                    imageAlpha.a = initAlpha;
-                    fadeImage.color = imageAlpha;
-                    yield return new WaitForSeconds(.015f);
-                }
-                //BeginTimer();
-                break;
+            initAlpha = 1.0f;
+            endAlpha = 0;
+            while (initAlpha > endAlpha) {
+                initAlpha -= 0.01f;
+                imageAlpha.a = initAlpha;
+                fadeImage.color = imageAlpha;
+                yield return new WaitForSeconds (.015f);
+            }
+            //BeginTimer();
+            break;
             case "outIn":
-                initAlpha = 0;
-                endAlpha = 1.0f;
-                while (initAlpha < endAlpha)
-                {
-                    initAlpha += 0.01f;
-                    imageAlpha.a = initAlpha;
-                    fadeImage.color = imageAlpha;
-                    yield return new WaitForSeconds(.015f);
-                }
-                break;
+            initAlpha = 0;
+            endAlpha = 1.0f;
+            while (initAlpha < endAlpha) {
+                initAlpha += 0.01f;
+                imageAlpha.a = initAlpha;
+                fadeImage.color = imageAlpha;
+                yield return new WaitForSeconds (.015f);
+            }
+            break;
 
         }
-        StopCoroutine(FadeAnim("inOut"));
+        StopCoroutine (FadeAnim ("inOut"));
 
     }
 
-    private IEnumerator ColorChange(int toColor)
-    {
+    private IEnumerator ColorChange (int toColor) {
         float ElapsedTime = 0.0f;
         //float TotalTime = 10.0f;
-        while (ElapsedTime < colorTransitionTime)
-        {
+        while (ElapsedTime < colorTransitionTime) {
             ElapsedTime += Time.deltaTime;
-            Color currentColor = Color.Lerp(initColor, TopColors[toColor], (ElapsedTime / colorTransitionTime));
-            Color currentColor2 = Color.Lerp(initColor2, BottomColors[toColor], (ElapsedTime / colorTransitionTime));
+            Color currentColor = Color.Lerp (initColor, TopColors[toColor], (ElapsedTime / colorTransitionTime));
+            Color currentColor2 = Color.Lerp (initColor2, BottomColors[toColor], (ElapsedTime / colorTransitionTime));
             //Debug.Log(currentColor);
-            backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color1", currentColor);
-            backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color", currentColor2);
-            yield return new WaitForSeconds(.01f);
+            backgroundPlane.GetComponent<Renderer> ().material.SetColor ("_Color1", currentColor);
+            backgroundPlane.GetComponent<Renderer> ().material.SetColor ("_Color", currentColor2);
+            yield return new WaitForSeconds (.01f);
         }
         initColor = TopColors[toColor];
         initColor2 = BottomColors[toColor];
     }
 
-    private void StartGame()
-    {
-        fadePanel.SetActive(true);
-        StartCoroutine(FadeAnim("inOut"));
-        if(currentCheckpoint == null)
+    private void StartGame () {
+        fadePanel.SetActive (true);
+        StartCoroutine (FadeAnim ("inOut"));
+        if (currentCheckpoint == null)
             currentCheckpoint = initialCheckpoint;
-        else
-        {
-            RestartInCheckpoint();
+        else {
+            RestartInCheckpoint ();
         }
     }
 
-    private void EndGame(bool winState)
-    {
-        if (!winState)
-        {
-            endgamePanel.SetActive(true);
+    private void EndGame (bool winState) {
+        if (!winState) {
+            endgamePanel.SetActive (true);
             endGameText.text = "Perdiste cabron!!!";
-            StartCoroutine(FadeAnim("outIn"));
+            StartCoroutine (FadeAnim ("outIn"));
         }
     }
 
-    public void SetCheckPoint(GameObject overlappedCheckpoint)
-    {
+    public void SetCheckPoint (GameObject overlappedCheckpoint) {
         currentCheckpoint = overlappedCheckpoint;
-        overlappedCheckpoint.GetComponent<CapsuleCollider2D>().enabled = false;
+        overlappedCheckpoint.GetComponent<CapsuleCollider2D> ().enabled = false;
         currentColorInArray++;
-        StopCoroutine(StartGrowTimer());
+        StopCoroutine (StartGrowTimer ());
         GrowtimerUI.maxValue = GrowthtimeLeft;
         GrowtimerUI.value = GrowthtimeLeft;
-        BeginTimer();
-        StartCoroutine(ColorChange(currentColorInArray));
+        BeginTimer ();
+        if (currentColorInArray <= TopColors.Length)
+            StartCoroutine (ColorChange (currentColorInArray));
     }
 
-    public void RestartInCheckpoint()
-    {
+    public void RestartInCheckpoint () {
         player.transform.position = currentCheckpoint.transform.position;
-        fadePanel.SetActive(true);
-        StartCoroutine(FadeAnim("inOut"));
-        endgamePanel.SetActive(false);
-        StopCoroutine(StartGrowTimer());
+        fadePanel.SetActive (true);
+        StartCoroutine (FadeAnim ("inOut"));
+        endgamePanel.SetActive (false);
+        StopCoroutine (startGrowthTimer);
         GrowtimerUI.maxValue = GrowthtimeLeft;
         GrowtimerUI.value = GrowthtimeLeft;
-        BeginTimer();
+        BeginTimer ();
     }
 
-    public void NewGameFromMenu()
-    {
-        StartCoroutine(load("Dakalo test"));
+    public void NewGameFromMenu () {
+        StartCoroutine (load ("Dakalo test"));
     }
 
-    IEnumerator load(string scene)
-    {
-        Debug.LogWarning("ASYNC LOAD STARTED - " +
+    IEnumerator load (string scene) {
+        Debug.LogWarning ("ASYNC LOAD STARTED - " +
            "DO NOT EXIT PLAY MODE UNTIL SCENE LOADS... UNITY WILL CRASH");
-        async = Application.LoadLevelAsync(scene);
+        async = Application.LoadLevelAsync (scene);
         async.allowSceneActivation = true;
         yield return async;
     }
 
-    public void GotCollectable()
-    {
-        StopGrowthTimer();
+    public void GotCollectable () {
+        StopGrowthTimer ();
         currentGrowthTimerValue += 1;
         GrowthtimeLeft = currentGrowthTimerValue;
-        if (player.GetComponent<PlayerController>().HasShell==false)
-        {
-            StartCoroutine(StartGrowTimer());
+        if (player.GetComponent<PlayerController> ().HasShell == false) {
+            startGrowthTimer = StartCoroutine (StartGrowTimer ());
         }
-        else
-        {
+        else {
         }
 
     }
