@@ -8,6 +8,7 @@ TagManager:
   - Gameplay camera
   - Checkpoint
   - Pickable
+  - Collectable
   layers:
   - Default
   - TransparentFX

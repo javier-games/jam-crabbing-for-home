@@ -134,7 +134,7 @@ public class PlayerController: MonoBehaviour {
     private void FixedUpdate () {
 
         //  Dying Effect.
-        if (state == State.DYING)
+        if (state == State.DYING || state == State.DEAD)
             return;
 
         float delta = Time.deltaTime;
@@ -172,6 +172,11 @@ public class PlayerController: MonoBehaviour {
         if (other.tag == "Checkpoint") {
             gameMode.SetCheckPoint (other.gameObject);
         }
+
+        if(other.tag == "Collectable") {
+            //gameMode.Collectable ();
+            Destroy (other.gameObject);
+        }
     }
 
     #endregion
@@ -193,11 +198,11 @@ public class PlayerController: MonoBehaviour {
             if (!handler.hasItem) {
                 if (leftRay.hittedObject != null && leftRay.hittedObject.CompareTag ("Pickable")) {
                     handler.Pick (leftRay.hittedObject.transform);
-                    //  gameMode.StopTimer();
+                    gameMode.StopTimer();
                 }
                 else if (rightRay.hittedObject != null && rightRay.hittedObject.CompareTag ("Pickable")) {
                     handler.Pick (rightRay.hittedObject.transform);
-                    //  gameMode.StopTimer ()
+                    gameMode.StopTimer ();
                 }
             }
             else if (handler.hasItem) {
@@ -214,7 +219,7 @@ public class PlayerController: MonoBehaviour {
 
     private void UpdateStates () {
 
-        if (state == State.DYING)
+        if (state == State.DYING || state == State.DEAD)
             return;
 
         State lastState = state;
@@ -288,6 +293,7 @@ public class PlayerController: MonoBehaviour {
             case State.DYING:
                 animationController.PlayAnimation (4);
                 angleRotatioTarget = 0;
+                state = State.DEAD;
             break;
         }
 
@@ -301,7 +307,7 @@ public class PlayerController: MonoBehaviour {
 
 
         //  Set Flip Animation.
-        if (state == State.DYING)
+        if (state == State.DYING || state == State.DEAD)
             return;
         render.flipX = horizontalAxis < 0;
         if (flipAction != null)
@@ -392,7 +398,8 @@ public class PlayerController: MonoBehaviour {
         CLIMBING,
         JUMPING,
         STARTJUMPING,
-        DYING
+        DYING,
+        DEAD
     }
 
     [System.Serializable]
