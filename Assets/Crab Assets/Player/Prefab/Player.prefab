@@ -4853,6 +4853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 1
   animationController: {fileID: 3641289269862540663}
+  pickUp: {fileID: 1987353644}
   gameMode: {fileID: 0}
   forwardSpeed: 250
   forwardSmooth: 0.15
@@ -4864,6 +4865,9 @@ MonoBehaviour:
   magnitude: 0.44
   angleGrad: 92
   smoothRotation: 0.1
+  jumpForce: 30
+  extraForce: 0.1
+  maxJumpTime: 3
 --- !u!114 &1987353644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4878,6 +4882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   homeAnchor: {fileID: 72895992}
   homeAnchorFliped: {fileID: 1338935604}
+  hasItem: 0
 --- !u!1 &2034841651763849469
 GameObject:
   m_ObjectHideFlags: 0

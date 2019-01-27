@@ -7,7 +7,8 @@ public class PickUp : MonoBehaviour
     [SerializeField] private GameObject homeAnchor;
     [SerializeField] private GameObject homeAnchorFliped;
 
-    private bool hasItem = false;
+    [HideInInspector]
+    public bool hasItem = false;
     public static GameObject pickedObject;
     private SpriteRenderer[] sprites;
    
@@ -37,6 +38,7 @@ public class PickUp : MonoBehaviour
             {
                 pickedObject = collision.transform.gameObject;
                 sprites = collision.GetComponentsInChildren<SpriteRenderer>();
+                hasItem = true;
                 SetHome();
             }          
         }
@@ -53,6 +55,8 @@ public class PickUp : MonoBehaviour
 
     private void Flipping(bool flip)
     {
+        if (!hasItem)
+            return;
         if (flip)
         {
             pickedObject.transform.parent = homeAnchorFliped.transform;

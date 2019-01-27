@@ -15,6 +15,8 @@ public class PlayerController: MonoBehaviour {
     private State state = State.FOLLING;    //  Sate of the current player.
     [SerializeField]
     private CharacterAnimationcontroller animationController;
+    [SerializeField]
+    private PickUp pickUp;
 
 
     [SerializeField]
@@ -68,6 +70,22 @@ public class PlayerController: MonoBehaviour {
     private float angleRotationVelocity;
     private float angleRotatioTarget;
 
+
+
+
+    [Header("Jump")]
+    [SerializeField]
+    protected float jumpForce = 10f;        //  Impulse Force at jump.
+    [SerializeField]
+    protected float extraForce = 0.01f;     //  Extra impulse at jump.
+    [SerializeField]
+    protected float maxJumpTime = 3f;       //  Maximum time for jump.
+
+    private float jumpTime;                 //  Time since start jump.
+
+
+
+
     public static System.Action<bool> flipAction; 
 
     #endregion
@@ -101,6 +119,7 @@ public class PlayerController: MonoBehaviour {
         //  Getting shortcuts.
         bool folling = state == State.FOLLING;
         bool climbing = state == State.CLIMBING;
+        bool jumping = state == State.JUMPING;
 
         //  Getting horizontal velocity.
         float x = horizontalAxis * forwardSpeed * Time.deltaTime;
@@ -110,9 +129,19 @@ public class PlayerController: MonoBehaviour {
 
         //  Getting vertical velocity.
         float y = rigidbody.velocity.y + (climbing && (horizontalAxis >0.01 || horizontalAxis < -0.01) ? forwardSpeed * Time.deltaTime * climbingMovement : 0);
+        if (jumping && jumpTime < maxJumpTime && Input.GetKey (KeyCode.Space)) {
+            float gaussian = Mathf.Exp (-Mathf.Pow (jumpTime, 2));
+            y += extraForce * gaussian * Time.deltaTime;
+        }
 
         //  Applying movement.
         rigidbody.velocity = new Vector2 (x, y);
+
+        //  Applying jump.
+        if (state == State.STARTJUMPING) {
+            rigidbody.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
+            state = State.JUMPING;
+        }
 
         child.GetComponent<SpriteRenderer> ().flipX = horizontalAxis < 0;
         if (flipAction != null)
@@ -161,24 +190,36 @@ public class PlayerController: MonoBehaviour {
     //  Updates the state.
     private void UpdateState () {
 
+
+        bool jumping = state == State.JUMPING;
+        bool grounded = state == State.GROUNDED;
+
         laststate = state;
         state = State.GROUNDED;
         //  Defining if the player is falling.
-        if (rigidbody.velocity.y < 0 && state != State.CLIMBING)
+        if (rigidbody.velocity.y < 0 && state != State.CLIMBING) {
             state = State.FOLLING;
+            jumpTime = 0;
+        }
+
+        if (grounded && Input.GetKeyDown (KeyCode.Space) && !pickUp.hasItem) {
+            state = State.STARTJUMPING;
+            jumpTime = 0;
+        }
+
+        if (jumping)
+            jumpTime += Time.deltaTime;
 
         facingLeft = FacingLeft();
         facingRight = FacingRight ();
-        if (state == State.GROUNDED && ((facingLeft && CanClimb (-1)) || (facingRight && CanClimb (1))))
+        if (state == State.GROUNDED && !(state== State.JUMPING || state == State.JUMPING) && ((facingLeft && CanClimb (-1)) || (facingRight && CanClimb (1))))
             state = State.CLIMBING;
+
+
 
     }
 
     private void UpdateAnimation () {
-
-
-            Debug.Log (state);
-            Debug.Log (horizontalAxis);
             switch (state) {
                 case State.GROUNDED:
 
@@ -204,6 +245,21 @@ public class PlayerController: MonoBehaviour {
 
                 angleRotatioTarget = horizontalAxis > 0 ? 90 : -90;
                 break;
+
+            case State.JUMPING:
+
+            animationController.PlayAnimation (3);
+
+            angleRotatioTarget = 0;
+
+            break;
+            case State.STARTJUMPING:
+
+            animationController.PlayAnimation (3);
+
+            angleRotatioTarget = 0;
+
+            break;
 
         }
     }
@@ -330,7 +386,9 @@ public class PlayerController: MonoBehaviour {
     private enum State {
         GROUNDED,
         FOLLING,
-        CLIMBING
+        CLIMBING,
+        JUMPING,
+        STARTJUMPING
     }
 
     #endregion
