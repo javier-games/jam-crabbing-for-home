@@ -47,11 +47,33 @@ public class GameMode: MonoBehaviour
     public void BeginTimer()
     {
         StartCoroutine(StartGrowTimer());
+        StartCoroutine(StartNakedTimer());
+    }
+
+    public void StopNakednessTimer()
+    {
+        StopCoroutine(StartNakedTimer());
     }
 
     public void StopGrowthTimer()
     {
         StopCoroutine(StartGrowTimer());
+    }
+
+    private IEnumerator StartNakedTimer()
+    {
+        currentTimerValue = timeLeft;
+        while (currentTimerValue > 0)
+        {
+            //Debug.Log("Timer: " + currentTimerValue);
+            GrowtimerUI.value = currentTimerValue;
+            yield return new WaitForSeconds(.01f);
+            currentTimerValue -= .01f;
+        }
+        if (currentTimerValue <= 0)
+        {
+            EndGame(false);
+        }
     }
 
     private IEnumerator StartGrowTimer()
