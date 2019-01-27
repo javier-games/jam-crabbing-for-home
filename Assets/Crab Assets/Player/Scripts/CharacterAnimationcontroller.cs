@@ -7,6 +7,7 @@ public class CharacterAnimationcontroller : MonoBehaviour
 {
 
     private Animator playerAnimator;
+    [SerializeField] private Animator anchorAnimator;
 
      private void Start()
     {
@@ -52,6 +53,7 @@ public class CharacterAnimationcontroller : MonoBehaviour
             // idle
             case 0:                
                 playerAnimator.Play("Idle");
+                anchorAnimator.Play("AnchorIdle");
                 break;
 
                 //walk
@@ -67,6 +69,7 @@ public class CharacterAnimationcontroller : MonoBehaviour
             //jump
             case 3:
                 playerAnimator.SetTrigger("Jump");
+                anchorAnimator.SetTrigger("Jump");
                 break;
 
             //death
