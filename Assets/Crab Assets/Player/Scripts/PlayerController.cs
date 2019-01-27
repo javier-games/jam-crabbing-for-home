@@ -204,11 +204,11 @@ public class PlayerController: MonoBehaviour {
             if (!handler.hasItem) {
                 if (leftRay.hittedObject != null && leftRay.hittedObject.CompareTag ("Pickable")) {
                     handler.Pick (leftRay.hittedObject.transform);
-                    gameMode.StopTimer();
+                    gameMode.StopNakednessTimer ();
                 }
                 else if (rightRay.hittedObject != null && rightRay.hittedObject.CompareTag ("Pickable")) {
                     handler.Pick (rightRay.hittedObject.transform);
-                    gameMode.StopTimer ();
+                    gameMode.StopNakednessTimer ();
                 }
             }
             else if (handler.hasItem) {
