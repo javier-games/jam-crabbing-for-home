@@ -170,6 +170,7 @@ public class GameMode: MonoBehaviour {
 
                 StopAllCoroutines ();
                 Instantiate (finalprefab);
+                return;
             }
 
         }
