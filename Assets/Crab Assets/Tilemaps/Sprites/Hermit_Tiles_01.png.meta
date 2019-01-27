@@ -1,23 +1,20 @@
 fileFormatVersion: 2
-guid: ec3dfd8cf43c759489ad55a823a9e75d
+guid: 75f6efc7ccb9adb4596b17d74508c9cc
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Sand Tile_0
-    21300002: Sand Tile_1
-    21300004: Sand Tile_2
-    21300006: Sand Tile_3
-    21300008: Sand Tile_4
-    21300010: Sand Tile_5
-    21300012: Sand Tile_6
-    21300014: Sand Tile_7
-    21300016: Sand Tile_8
-    21300018: Sand Tile_9
-    21300020: Sand Tile_10
-    21300022: Sand Tile_11
-    21300024: Sand Tile_12
-    21300026: Sand Tile_13
-    21300028: Sand Tile_14
-    21300030: Sand Tile_15
+    21300000: Hermit_Tiles_01_0
+    21300002: Hermit_Tiles_01_1
+    21300004: Hermit_Tiles_01_2
+    21300006: Hermit_Tiles_01_3
+    21300008: Hermit_Tiles_01_4
+    21300010: Hermit_Tiles_01_5
+    21300012: Hermit_Tiles_01_6
+    21300014: Hermit_Tiles_01_7
+    21300016: Hermit_Tiles_01_8
+    21300018: Hermit_Tiles_01_9
+    21300020: Hermit_Tiles_01_10
+    21300022: Hermit_Tiles_01_11
+    21300024: Hermit_Tiles_01_12
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -100,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sand Tile_0
+      name: Hermit_Tiles_01_0
       rect:
         serializedVersion: 2
         x: 0
@@ -114,13 +111,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14f7afdfa623163449685404fc9ea7d5
+      spriteID: 9c602339c25821b43b9f229d1d68b941
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sand Tile_1
+      name: Hermit_Tiles_01_1
       rect:
         serializedVersion: 2
         x: 256
@@ -134,13 +131,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f59876e8f2148e47970fcd86f1dab2e
+      spriteID: d8561de5ec96d6c43a28205574d01b30
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sand Tile_2
+      name: Hermit_Tiles_01_2
       rect:
         serializedVersion: 2
         x: 512
@@ -154,13 +151,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 864bd1a3fae5b7243bb42d9bee43e963
+      spriteID: ae3fce4b6362c1445bb1a1c5db05d15e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sand Tile_3
+      name: Hermit_Tiles_01_3
       rect:
         serializedVersion: 2
         x: 768
@@ -174,13 +171,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ea19396753913a4e9ce65e76814d43b
+      spriteID: f383e7536643e7141b8cde4b390c139c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sand Tile_4
+      name: Hermit_Tiles_01_4
       rect:
         serializedVersion: 2
         x: 0
@@ -194,13 +191,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 786c6420f05ef284bbe65f42a41d9ece
+      spriteID: d2533067ce3d3ff47bd8e3764bfdd847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sand Tile_5
+      name: Hermit_Tiles_01_5
       rect:
         serializedVersion: 2
         x: 256
@@ -214,13 +211,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8287d89af188d7942a1f6d9b6f37615a
+      spriteID: 67b2ba9751f208a4f9d968bfe424742d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sand Tile_6
+      name: Hermit_Tiles_01_6
       rect:
         serializedVersion: 2
         x: 512
@@ -234,13 +231,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78360462a4f4aac4b81f09a240970db5
+      spriteID: a3fd75d4fcb8e0b46aababa3019df494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sand Tile_7
+      name: Hermit_Tiles_01_7
       rect:
         serializedVersion: 2
         x: 768
@@ -254,13 +251,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6914623c0140780498454d4dd87e7547
+      spriteID: e15d47675c400b94dbe1ea8fe8d03442
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sand Tile_8
+      name: Hermit_Tiles_01_8
       rect:
         serializedVersion: 2
         x: 0
@@ -274,13 +271,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9a9b657c5624d74e9a287bdcda54073
+      spriteID: 724173ebfedfb62478547a6d72cad427
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sand Tile_9
+      name: Hermit_Tiles_01_9
       rect:
         serializedVersion: 2
         x: 256
@@ -294,13 +291,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34ce9bae9d528c64a878b7f663be8267
+      spriteID: c3de150c7c2616f4a9d67ce5984f5487
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sand Tile_10
+      name: Hermit_Tiles_01_10
       rect:
         serializedVersion: 2
         x: 512
@@ -314,13 +311,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f66ff2f3af10a784f9e9b503843bc933
+      spriteID: ddc365f063cf76a479c97b76da3eb110
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sand Tile_11
+      name: Hermit_Tiles_01_11
       rect:
         serializedVersion: 2
         x: 768
@@ -334,13 +331,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a278d99d0fc243e4398f17e9ae73632e
+      spriteID: 098e6d0e2bd7bc04d9f8f777543b9d81
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sand Tile_12
+      name: Hermit_Tiles_01_12
       rect:
         serializedVersion: 2
         x: 0
@@ -354,67 +351,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfbc50bf5a761d8429618110059de7fe
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sand Tile_13
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b280377841d1d354ea2ae1d4fd5e0e2f
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sand Tile_14
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 0
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 89905ead945c52540b430c89f1629afb
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sand Tile_15
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 853efeb84e353ed4c87f87eb37f11f0f
+      spriteID: d065c943426e99444a66fa36562e2df0
       vertices: []
       indices: 
       edges: []
@@ -422,7 +359,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c46370e378fa46448a2ff964ab5ac1a8
+    spriteID: da40378a764387c46b856339086af0f1
     vertices: []
     indices: 
     edges: []
