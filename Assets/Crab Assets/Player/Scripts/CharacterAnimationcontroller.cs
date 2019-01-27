@@ -14,7 +14,7 @@ public class CharacterAnimationcontroller : MonoBehaviour
         PlayAnimation(99);
     }
 
-   
+/*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
@@ -43,7 +43,7 @@ public class CharacterAnimationcontroller : MonoBehaviour
         }
     }
     
-    
+    */
 
     public void PlayAnimation( int animIndex)
     {
