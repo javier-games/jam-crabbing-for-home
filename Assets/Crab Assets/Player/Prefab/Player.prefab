@@ -93,8 +93,8 @@ MonoBehaviour:
   slopeOffset: {x: 0, y: 0}
   climbingMovement: 0.35
   fallingMovement: 0.31
-  magnitude: 0.63
-  angleGrad: 115
+  magnitude: 0.44
+  angleGrad: 92
   smoothRotation: 0.1
 --- !u!1 &3641289269862540662
 GameObject:

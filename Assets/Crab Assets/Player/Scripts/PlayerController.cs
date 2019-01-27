@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -150,31 +150,8 @@ public class PlayerController: MonoBehaviour {
     //  Updates the horizontal variable.
     private void UpdateHorizontalSense () {
 
-        //  Read inputs.
-        if (Input.GetKeyDown (KeyCode.RightArrow))
-            forwardSense = 1;
-        if (Input.GetKeyDown (KeyCode.LeftArrow))
-            forwardSense = -1;
-        if (Input.GetKeyUp (KeyCode.RightArrow) && forwardSense > 0)
-            forwardSense = 0;
-        if (Input.GetKeyUp (KeyCode.LeftArrow) && forwardSense < 0)
-            forwardSense = 0;
-        if (Input.GetKeyDown (KeyCode.D))
-            forwardSense = 1;
-        if (Input.GetKeyDown (KeyCode.A))
-            forwardSense = -1;
-        if (Input.GetKeyUp (KeyCode.D) && forwardSense > 0)
-            forwardSense = 0;
-        if (Input.GetKeyUp (KeyCode.A) && forwardSense < 0)
-            forwardSense = 0;
-
         //  Applying Smooth.
-        horizontalAxis = Mathf.SmoothDamp (
-            current: horizontalAxis,
-            target: forwardSense,
-            currentVelocity: ref forwardVelocity,
-            smoothTime: forwardSmooth
-        );
+        horizontalAxis = Input.GetAxis ("Horizontal");
     }
 
     //  Updates the state.
@@ -194,11 +171,14 @@ public class PlayerController: MonoBehaviour {
     }
 
     private void UpdateAnimation () {
-        if (laststate != state) {
+
+
+            Debug.Log (state);
+            Debug.Log (horizontalAxis);
             switch (state) {
                 case State.GROUNDED:
 
-                    if(horizontalAxis > 0.01f && horizontalAxis < -0.01f)
+                    if(horizontalAxis > 0.1f || horizontalAxis < -0.1f)
                         animationController.PlayAnimation (1);
                     else
                         animationController.PlayAnimation (0);
@@ -208,19 +188,19 @@ public class PlayerController: MonoBehaviour {
 
                 case State.FOLLING:
                     animationController.PlayAnimation (2);
+
                     angleRotatioTarget = 0;
                 break;
 
                 case State.CLIMBING:
-                if (horizontalAxis > 0.01f && horizontalAxis < -0.01f) {
+                if (horizontalAxis > 0.1f || horizontalAxis < -0.1f)
                     animationController.PlayAnimation (1);
-                    child.GetComponent<SpriteRenderer> ().flipY = true;
-                }
                 else
                     animationController.PlayAnimation (0);
+
                 angleRotatioTarget = horizontalAxis > 0 ? 90 : -90;
                 break;
-            }
+
         }
     }
 
@@ -323,6 +303,22 @@ public class PlayerController: MonoBehaviour {
             down = hit.collider != null;
 
         return up || down;
+    }
+
+    private bool Grounded () {
+        hit = Physics2D.Raycast (
+            origin: transform.position,
+            direction: transform.InverseTransformPoint ((Vector2)transform.position + Vector2.down * 0.7f),
+            distance: magnitude
+        );
+        #if UNITY_EDITOR
+        Debug.DrawRay (
+            start: transform.position,
+            dir: transform.InverseTransformPoint ((Vector2)transform.position + Vector2.down * 0.7f),
+            color: Color.cyan
+        );
+        #endif
+        return hit.collider != null;
     }
 
 
