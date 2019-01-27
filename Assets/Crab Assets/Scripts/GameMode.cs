@@ -182,4 +182,19 @@ public class GameMode: MonoBehaviour
         async.allowSceneActivation = true;
         yield return async;
     }
+
+    public void GotCollectable()
+    {
+        StopTimer();
+        currentTimerValue += 1;
+        timeLeft = currentTimerValue;
+        if (player.GetComponent<PlayerController>().HasShell==false)
+        {
+            StartCoroutine(StartTimer());
+        }
+        else
+        {
+        }
+
+    }
 }
