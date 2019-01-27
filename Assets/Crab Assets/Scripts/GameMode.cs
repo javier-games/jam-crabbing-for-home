@@ -49,7 +49,7 @@ public class GameMode: MonoBehaviour
     public void BeginTimer()
     {
         StartCoroutine(StartGrowTimer());
-        StartCoroutine(StartNakedTimer());
+        //StartCoroutine(StartNakedTimer());
     }
 
     public void StopNakednessTimer()
