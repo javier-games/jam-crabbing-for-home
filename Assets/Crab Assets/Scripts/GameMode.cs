@@ -24,6 +24,7 @@ public class GameMode: MonoBehaviour
     public int currentColorInArray = 0;
     public Color initColor;
     public Color initColor2;
+    AsyncOperation async;
 
 
     void Start()
@@ -165,6 +166,15 @@ public class GameMode: MonoBehaviour
 
     public void NewGameFromMenu()
     {
+        StartCoroutine(load("Dakalo test"));
+    }
 
+    IEnumerator load(string scene)
+    {
+        Debug.LogWarning("ASYNC LOAD STARTED - " +
+           "DO NOT EXIT PLAY MODE UNTIL SCENE LOADS... UNITY WILL CRASH");
+        async = Application.LoadLevelAsync(scene);
+        async.allowSceneActivation = true;
+        yield return async;
     }
 }
