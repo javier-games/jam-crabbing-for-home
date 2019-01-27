@@ -68,7 +68,7 @@ public class PlayerController: MonoBehaviour {
     private float angleRotationVelocity;
     private float angleRotatioTarget;
 
-    public System.Action<bool> flipAction; 
+    public static System.Action<bool> flipAction; 
 
     #endregion
 
