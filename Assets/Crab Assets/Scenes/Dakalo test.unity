@@ -411,6 +411,11 @@ PrefabInstance:
       propertyPath: initialCheckpoint
       value: 
       objectReference: {fileID: 1122494741}
+    - target: {fileID: 8014209500399312234, guid: e558a1134a3c8224baea8d4c246e5207,
+        type: 3}
+      propertyPath: timeLeft
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4672015165346480163, guid: e558a1134a3c8224baea8d4c246e5207,
         type: 3}
       propertyPath: m_AnchoredPosition.x

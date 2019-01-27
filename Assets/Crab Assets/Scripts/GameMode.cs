@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameMode: MonoBehaviour
 {
+    public GameObject player;
     public GameObject fadePanel;
     private Image fadeImage;
     public GameObject currentCheckpoint;
@@ -27,6 +28,7 @@ public class GameMode: MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
         fadeImage = fadePanel.GetComponent<Image>();
         endgamePanel.SetActive(false);
         initColor = TopColors[currentColorInArray];
@@ -34,12 +36,17 @@ public class GameMode: MonoBehaviour
         initColor2 = BottomColors[currentColorInArray];
         backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color", initColor2);
 
-
+        timerUI.maxValue = timeLeft;
         /*currentColorInArray++;
         StartCoroutine(ColorChange(currentColorInArray));*/
         StartGame();
     }
     
+    public void BeginTimer()
+    {
+        StartCoroutine(StartTimer());
+    }
+
     private IEnumerator StartTimer()
     {
         currentTimerValue = timeLeft;
@@ -73,7 +80,7 @@ public class GameMode: MonoBehaviour
                     fadeImage.color = imageAlpha;
                     yield return new WaitForSeconds(.015f);
                 }
-                StartCoroutine(StartTimer());
+                BeginTimer();
                 break;
             case "outIn":
                 initAlpha = 0;
@@ -88,7 +95,7 @@ public class GameMode: MonoBehaviour
                 break;
 
         }
-        
+        StopCoroutine(FadeAnim("inOut"));
 
     }
 
@@ -135,13 +142,25 @@ public class GameMode: MonoBehaviour
     public void SetCheckPoint(GameObject overlappedCheckpoint)
     {
         currentCheckpoint = overlappedCheckpoint;
+        overlappedCheckpoint.GetComponent<CapsuleCollider2D>().enabled = false;
         currentColorInArray++;
+        StopCoroutine(StartTimer());
+        timerUI.maxValue = timeLeft;
+        timerUI.value = timeLeft;
+        BeginTimer();
         StartCoroutine(ColorChange(currentColorInArray));
     }
 
     public void RestartInCheckpoint()
     {
-        StartGame();
+        player.transform.position = currentCheckpoint.transform.position;
+        fadePanel.SetActive(true);
+        StartCoroutine(FadeAnim("inOut"));
+        endgamePanel.SetActive(false);
+        StopCoroutine(StartTimer());
+        timerUI.maxValue = timeLeft;
+        timerUI.value = timeLeft;
+        BeginTimer();
     }
 
     public void NewGameFromMenu()
