@@ -10,11 +10,12 @@
     {
 
         Tags { "RenderType"="Opaque" }
-        LOD 200
+		ZWrite On
+        LOD 20000
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
-		#pragma surface surf Standard alphatest:_Cutoff
+		#pragma surface surf Standard alphatest:_Fade
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
