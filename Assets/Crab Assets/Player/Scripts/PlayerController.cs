@@ -13,6 +13,8 @@ public class PlayerController: MonoBehaviour {
     private new Rigidbody2D rigidbody;      //  Rigidbody of this Game Object.
     [SerializeField]
     private State state = State.FOLLING;    //  Sate of the current player.
+    [SerializeField]
+    private CharacterAnimationcontroller animationController;
 
     [Header ("Forward Parameters")]
     [SerializeField]
@@ -59,6 +61,8 @@ public class PlayerController: MonoBehaviour {
     bool facingLeft;
     bool facingRight;
 
+    private State laststate = State.FOLLING;
+
     #endregion
 
 
@@ -78,6 +82,7 @@ public class PlayerController: MonoBehaviour {
     private void Update () {
         UpdateHorizontalSense ();
         UpdateState ();
+        UpdateAnimateion ();
     }
 
     //  Called each frame fixed. Used it for physics.
@@ -94,59 +99,16 @@ public class PlayerController: MonoBehaviour {
         x = x < 0 && facingRight ? 0 : x;
 
         //  Getting vertical velocity.
-        float y = rigidbody.velocity.y + (climbing ? forwardSpeed * Time.deltaTime * climbingMovement : 0);
+        float y = rigidbody.velocity.y + (climbing && (horizontalAxis >0.01 || horizontalAxis < -0.01) ? forwardSpeed * Time.deltaTime * climbingMovement : 0);
 
         //  Applying movement.
         rigidbody.velocity = new Vector2 (x, y);
     }
 
-    //  Called on collision enter.
-    /*
-    private void OnCollisionEnter2D (Collision2D collision) {
-
-        //  Adding collider to the lists.
-        ContactPoint2D[] contacts = collision.contacts;
-
-        Debug.Log (contacts.Length);
-        foreach (ContactPoint2D contact in contacts) {
-
-            Vector2 point = transform.InverseTransformPoint (contact.point);
-
-            Debug.Log (point);
-
-            if (
-                leftField.Contains (point) &&
-                !leftColliders.Contains (collision.collider)
-            )
-                leftColliders.Add (collision.collider);
-
-            if (
-                rightField.Contains (point) &&
-                !rightColliders.Contains (collision.collider)
-            )
-                rightColliders.Add (collision.collider);
-        }
-    }*/
-
-    /*
-    //  Called on collision exit.
-    private void OnCollisionExit2D (Collision2D collision) {
-        //  Removing the collision from the list.
-        if (rightColliders.Contains (collision.collider))
-            rightColliders.Remove (collision.collider);
-
-        if (leftColliders.Contains (collision.collider))
-            leftColliders.Remove (collision.collider);
-    }*/
-
     //  Called to display gizmos.
 
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
     private void OnDrawGizmos () {
-
-        //  Drawing Field of views.
-        /*leftField.Draw (transform);
-        rightField.Draw (transform);*/
 
         //  Drawing Slope.
         float slopeRad = slopeAngle * Mathf.Deg2Rad;
@@ -156,7 +118,7 @@ public class PlayerController: MonoBehaviour {
             to: transform.TransformPoint (slopeOffset + new Vector2 (Mathf.Cos (slopeRad), Mathf.Sin (slopeRad)))
         );
     }
-#endif
+    #endif
 
     #endregion
 
@@ -188,6 +150,7 @@ public class PlayerController: MonoBehaviour {
     //  Updates the state.
     private void UpdateState () {
 
+        laststate = state;
         state = State.GROUNDED;
         //  Defining if the player is falling.
         if (rigidbody.velocity.y < 0 && state != State.CLIMBING)
@@ -197,6 +160,31 @@ public class PlayerController: MonoBehaviour {
         facingRight = FacingRight ();
         if (state == State.GROUNDED && ((facingLeft && CanClimb (-1)) || (facingRight && CanClimb (1))))
             state = State.CLIMBING;
+
+    }
+
+    private void UpdateAnimateion () {
+        if (laststate != state) {
+            switch (state) {
+                case State.GROUNDED:
+                    if(horizontalAxis > 0.01f && horizontalAxis < -0.01f)
+                        animationController.PlayAnimation (1);
+                    else
+                        animationController.PlayAnimation (0);
+                break;
+
+                case State.FOLLING:
+                    animationController.PlayAnimation (2);
+                break;
+
+                case State.CLIMBING:
+                if (horizontalAxis > 0.01f && horizontalAxis < -0.01f)
+                    animationController.PlayAnimation (1);
+                else
+                    animationController.PlayAnimation (0);
+                break;
+            }
+        }
     }
 
     private bool CanClimb (float x) {
