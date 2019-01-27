@@ -9,6 +9,14 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Vector3 cameraOffset;
 
 
+    private void Start()
+    {
+        if (target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Player");
+        }
+    
+    }
     private void FixedUpdate()
     {
         Vector3 pos = target.transform.position + cameraOffset;

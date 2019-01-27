@@ -14,6 +14,7 @@ public class CharacterAnimationcontroller : MonoBehaviour
         PlayAnimation(99);
     }
 
+    /*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
@@ -41,7 +42,7 @@ public class CharacterAnimationcontroller : MonoBehaviour
             PlayAnimation(4);
         }
     }
-
+    */
     
 
     public void PlayAnimation( int animIndex)
@@ -49,8 +50,7 @@ public class CharacterAnimationcontroller : MonoBehaviour
         switch (animIndex)
         {
             // idle
-            case 0:
-                playerAnimator.ResetTrigger("Walk");
+            case 0:                
                 playerAnimator.Play("Idle");
                 break;
                 //walk
