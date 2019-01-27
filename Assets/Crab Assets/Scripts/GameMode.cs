@@ -13,12 +13,28 @@ public class GameMode: MonoBehaviour
     public Slider timerUI;
     public GameObject endgamePanel;
     public Text endGameText;
+    public GameObject backgroundPlane;
+    public Color[] TopColors = new Color[4];
+    public Color[] BottomColors = new Color[4];
+    public float colorTransitionTime = 3.0f;
     float currentTimerValue;
+    Color currentColor;
+    Color currentColor2;
+    int currentColorInArray = 0;
+    Color initColor;
+    Color initColor2;
+
 
     void Start()
     {
         fadeImage = fadePanel.GetComponent<Image>();
         endgamePanel.SetActive(false);
+        initColor = TopColors[currentColorInArray];
+        backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color1", initColor);
+
+
+        currentColorInArray++;
+        StartCoroutine(ColorChange(currentColorInArray));
         StartGame();
     }
     
@@ -55,6 +71,7 @@ public class GameMode: MonoBehaviour
                     fadeImage.color = imageAlpha;
                     yield return new WaitForSeconds(.015f);
                 }
+                StartCoroutine(StartTimer());
                 break;
             case "outIn":
                 initAlpha = 0;
@@ -69,9 +86,26 @@ public class GameMode: MonoBehaviour
                 break;
 
         }
-        StartCoroutine(StartTimer());
+        
 
     }
+
+    private IEnumerator ColorChange(int toColor)
+    {
+        float ElapsedTime = 0.0f;
+        //float TotalTime = 10.0f;
+        while (ElapsedTime < colorTransitionTime)
+        {
+            ElapsedTime += Time.deltaTime;
+            Color currentColor = Color.Lerp(initColor, TopColors[toColor], (ElapsedTime / colorTransitionTime));
+            Color currentColor2 = Color.Lerp(initColor2, BottomColors[toColor], (ElapsedTime / colorTransitionTime));
+            Debug.Log(currentColor);
+            backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color1", currentColor);
+            backgroundPlane.GetComponent<Renderer>().material.SetColor("_Color", currentColor2);
+            yield return new WaitForSeconds(.01f);
+        }
+    }
+
     private void StartGame()
     {
         fadePanel.SetActive(true);
@@ -92,5 +126,7 @@ public class GameMode: MonoBehaviour
     public void SetCheckPoint(GameObject overlappedCheckpoint)
     {
         currentCheckpoint = overlappedCheckpoint;
+        currentColorInArray++;
+        StartCoroutine(ColorChange(currentColorInArray));
     }
 }

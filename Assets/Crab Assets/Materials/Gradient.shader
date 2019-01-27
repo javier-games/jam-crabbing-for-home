@@ -2,8 +2,8 @@
 {
     Properties
     {
-        _Color ("Top Color", Color) = (1,1,1,1)
-		_Color1 ("Bottom Color", Color) = (1,1,1,1)
+        _Color ("Bottom Color", Color) = (1,1,1,1)
+		_Color1 ("Top Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
     }
     SubShader
