@@ -434,7 +434,7 @@ public class PlayerController: MonoBehaviour {
                 mult: mult
             ).collider;
 
-            if (collider != null) {
+            if (collider != null && !collider.CompareTag("Collectable")) {
                 hittedObject = collider.gameObject;
                 return true;
             }
@@ -445,7 +445,7 @@ public class PlayerController: MonoBehaviour {
                 mult: mult
             ).collider;
 
-            if (collider != null) {
+            if (collider != null && !collider.CompareTag ("Collectable")) {
                 hittedObject = collider.gameObject;
                 return true;
             }
@@ -456,7 +456,7 @@ public class PlayerController: MonoBehaviour {
                 mult: mult
             ).collider;
 
-            if (collider != null) {
+            if (collider != null && !collider.CompareTag ("Collectable")) {
                 hittedObject = collider.gameObject;
                 return true;
             }
