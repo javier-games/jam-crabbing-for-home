@@ -48,6 +48,11 @@ public class GameMode: MonoBehaviour
         StartCoroutine(StartTimer());
     }
 
+    public void StopTimer()
+    {
+        StopCoroutine(StartTimer());
+    }
+
     private IEnumerator StartTimer()
     {
         currentTimerValue = timeLeft;
