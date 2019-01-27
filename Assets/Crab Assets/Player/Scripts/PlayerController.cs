@@ -68,6 +68,8 @@ public class PlayerController: MonoBehaviour {
     private float angleRotationVelocity;
     private float angleRotatioTarget;
 
+    public System.Action<bool> flipAction; 
+
     #endregion
 
 
@@ -113,6 +115,8 @@ public class PlayerController: MonoBehaviour {
         rigidbody.velocity = new Vector2 (x, y);
 
         child.GetComponent<SpriteRenderer> ().flipX = horizontalAxis < 0;
+        if (flipAction != null)
+            flipAction.Invoke (horizontalAxis < 0);
         child.eulerAngles = new Vector3 (0,0,Mathf.SmoothDampAngle(child.eulerAngles.z, angleRotatioTarget, ref angleRotationVelocity, smoothRotation));
     }
 
