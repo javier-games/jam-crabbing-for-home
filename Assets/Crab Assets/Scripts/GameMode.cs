@@ -53,7 +53,7 @@ public class GameMode: MonoBehaviour
                     initAlpha -= 0.01f;
                     imageAlpha.a = initAlpha;
                     fadeImage.color = imageAlpha;
-                    yield return new WaitForSeconds(.01f);
+                    yield return new WaitForSeconds(.015f);
                 }
                 break;
             case "outIn":
@@ -64,7 +64,7 @@ public class GameMode: MonoBehaviour
                     initAlpha += 0.01f;
                     imageAlpha.a = initAlpha;
                     fadeImage.color = imageAlpha;
-                    yield return new WaitForSeconds(.01f);
+                    yield return new WaitForSeconds(.015f);
                 }
                 break;
 
@@ -76,6 +76,7 @@ public class GameMode: MonoBehaviour
     {
         fadePanel.SetActive(true);
         StartCoroutine(FadeAnim("inOut"));
+        currentCheckpoint = initialCheckpoint;
     }
 
     private void EndGame(bool winState)
@@ -88,8 +89,8 @@ public class GameMode: MonoBehaviour
         }
     }
 
-    public void SetCheckPoint()
+    public void SetCheckPoint(GameObject overlappedCheckpoint)
     {
-
+        currentCheckpoint = overlappedCheckpoint;
     }
 }
