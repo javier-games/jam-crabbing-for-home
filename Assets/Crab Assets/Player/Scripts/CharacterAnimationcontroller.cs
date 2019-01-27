@@ -14,7 +14,7 @@ public class CharacterAnimationcontroller : MonoBehaviour
         PlayAnimation(99);
     }
 
-    /*
+   
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha0))
@@ -42,7 +42,7 @@ public class CharacterAnimationcontroller : MonoBehaviour
             PlayAnimation(4);
         }
     }
-    */
+    
     
 
     public void PlayAnimation( int animIndex)
@@ -53,23 +53,27 @@ public class CharacterAnimationcontroller : MonoBehaviour
             case 0:                
                 playerAnimator.Play("Idle");
                 break;
+
                 //walk
             case 1:
-                playerAnimator.SetTrigger("Walk");
-                print("walking");
+                playerAnimator.SetTrigger("Walk");                
                 break;
+
                 // glide
             case 2:
                 playerAnimator.SetTrigger("Glide");
                 break;
+
             //jump
             case 3:
                 playerAnimator.SetTrigger("Jump");
                 break;
+
             //death
             case 4:
                 playerAnimator.SetTrigger("Death");
                 break;
+
                 //default
             default:
                 playerAnimator.SetTrigger("Reset");
