@@ -154,7 +154,7 @@ public class PlayerController: MonoBehaviour {
         float y = rigidbody.velocity.y;
         //  Jumping Extra Effect.
         if (state == State.JUMPING && jumpTime < maxJumpTime && Input.GetKey(KeyCode.Space)) {
-            float tanh = Mathf.Atan (jumpTime);
+            float tanh = Mathf.Cos (jumpTime/maxJumpTime);
             y += extraForce * tanh;
         }
         //  Climbing Effect.
