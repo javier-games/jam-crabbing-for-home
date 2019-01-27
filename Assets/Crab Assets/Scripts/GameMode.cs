@@ -29,6 +29,9 @@ public class GameMode: MonoBehaviour
     public Color initColor2;
     AsyncOperation async;
 
+    public Image neckednessPanel;
+    public CanvasGroup neckednessCanvasGroup;
+
 
     void Start()
     {
@@ -111,7 +114,7 @@ public class GameMode: MonoBehaviour
                     fadeImage.color = imageAlpha;
                     yield return new WaitForSeconds(.015f);
                 }
-                BeginTimer();
+                //BeginTimer();
                 break;
             case "outIn":
                 initAlpha = 0;

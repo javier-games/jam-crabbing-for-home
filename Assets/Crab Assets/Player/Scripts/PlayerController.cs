@@ -180,7 +180,9 @@ public class PlayerController: MonoBehaviour {
                 gameMode.SetCheckPoint (other.gameObject);
             }
             catch (System.Exception e) { Debug.LogWarning (e); }
-            other.GetComponent<SpriteRenderer>().sprite = other.GetComponent<Checkpoint>().usedTexture;
+            SpriteRenderer render = other.GetComponent<SpriteRenderer> ();
+            if(render != null)
+            render.sprite = other.GetComponent<Checkpoint>().usedTexture;
         }
 
         if(other.tag == "Collectable") {
@@ -373,7 +375,7 @@ public class PlayerController: MonoBehaviour {
         #endif
 
         if (hit.collider != null)
-            return !hit.collider.CompareTag ("Collectable");
+            return !hit.collider.CompareTag ("Collectable") && !hit.collider.CompareTag ("Checkpoint");
         return true;
 
     }
@@ -449,7 +451,7 @@ public class PlayerController: MonoBehaviour {
                 mult: mult
             ).collider;
 
-            if (collider != null && !collider.CompareTag("Collectable")) {
+            if (collider != null && !collider.CompareTag("Collectable") && !collider.CompareTag ("Checkpoint") ) {
                 hittedObject = collider.gameObject;
                 return true;
             }
@@ -460,7 +462,7 @@ public class PlayerController: MonoBehaviour {
                 mult: mult
             ).collider;
 
-            if (collider != null && !collider.CompareTag ("Collectable")) {
+            if (collider != null && !collider.CompareTag ("Collectable") && !collider.CompareTag ("Checkpoint")) {
                 hittedObject = collider.gameObject;
                 return true;
             }
@@ -471,7 +473,7 @@ public class PlayerController: MonoBehaviour {
                 mult: mult
             ).collider;
 
-            if (collider != null && !collider.CompareTag ("Collectable")) {
+            if (collider != null && !collider.CompareTag ("Collectable") && !collider.CompareTag ("Checkpoint")) {
                 hittedObject = collider.gameObject;
                 return true;
             }
