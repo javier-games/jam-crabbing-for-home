@@ -188,10 +188,14 @@ public class PlayerController: MonoBehaviour {
             Kill ();
         }
         if (Input.GetKeyDown (KeyCode.RightShift)) {
-            if (leftRay.hittedObject != null && leftRay.hittedObject.CompareTag ("Pickable") && !handler.hasItem)
-                handler.Pick(leftRay.hittedObject.transform);
-            if (rightRay.hittedObject != null && rightRay.hittedObject.CompareTag ("Pickable") && !handler.hasItem)
-                handler.Pick (rightRay.hittedObject.transform);
+            if (!handler.hasItem) {
+                if (leftRay.hittedObject != null && leftRay.hittedObject.CompareTag ("Pickable"))
+                    handler.Pick (leftRay.hittedObject.transform);
+                else if (rightRay.hittedObject != null && rightRay.hittedObject.CompareTag ("Pickable"))
+                    handler.Pick (rightRay.hittedObject.transform);
+            }
+            else if (handler.hasItem)
+                handler.Drop ();
         }
 
         if(test) {

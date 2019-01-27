@@ -46,8 +46,15 @@ public class ObjectHandler : MonoBehaviour
         }
     }
 
+    public void Drop () {
+        if (!hasItem)
+            return;
+        pickedObject.transform.parent = transform.parent;
+        hasItem = false;
+    }
+
     public void GrowingUp (float scale) {
-        
+        Drop ();
     }
 
     private void SetHome()
