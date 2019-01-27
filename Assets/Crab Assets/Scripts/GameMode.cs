@@ -161,6 +161,16 @@ public class GameMode: MonoBehaviour {
     }
 
     public void SetCheckPoint (GameObject overlappedCheckpoint) {
+
+        Checkpoint check = overlappedCheckpoint.GetComponent<Checkpoint> ();
+        if (check != null) {
+            if (check.setLevel) {
+                Debug.Log ("the end");
+
+            }
+
+        }
+
         currentCheckpoint = overlappedCheckpoint;
         overlappedCheckpoint.GetComponent<CapsuleCollider2D> ().enabled = false;
         currentColorInArray++;
