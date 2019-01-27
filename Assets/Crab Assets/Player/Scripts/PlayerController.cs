@@ -5,7 +5,7 @@ using UnityEngine;
 /// Player controller.
 /// </summary>
 [RequireComponent (typeof (Rigidbody2D))]
-[RequireComponent (typeof (PickUp))]
+[RequireComponent (typeof (ObjectHandler))]
 public class PlayerController: MonoBehaviour {
 
 
@@ -19,7 +19,7 @@ public class PlayerController: MonoBehaviour {
     private CharacterAnimationcontroller animationController;
     private new Rigidbody2D rigidbody;
     private new Collider2D collider2D;     
-    private PickUp pickUp;
+    private ObjectHandler handler;
     private Transform child;
     private SpriteRenderer render;
 
@@ -87,6 +87,7 @@ public class PlayerController: MonoBehaviour {
     protected bool isGrowing;
     protected float growingTime;
     protected Vector3 originalScale;
+    public static System.Action<float> growUp;
 
     [Header ("Hurt Variables")]
     [SerializeField]
@@ -115,7 +116,7 @@ public class PlayerController: MonoBehaviour {
         //  Getting references.
         rigidbody = GetComponent<Rigidbody2D> ();
         collider2D = GetComponent<Collider2D> ();
-        pickUp = GetComponent<PickUp> ();
+        handler = GetComponent<ObjectHandler> ();
         child = transform.GetChild (0);
         render = child.GetComponent<SpriteRenderer> ();
         animationController = child.GetComponent<CharacterAnimationcontroller> ();
@@ -186,6 +187,12 @@ public class PlayerController: MonoBehaviour {
         if (Input.GetKeyDown (KeyCode.O)) {
             Kill ();
         }
+        if (Input.GetKeyDown (KeyCode.RightShift)) {
+            if (leftRay.hittedObject != null && leftRay.hittedObject.CompareTag ("Pickable") && !handler.hasItem)
+                handler.Pick(leftRay.hittedObject.transform);
+            if (rightRay.hittedObject != null && rightRay.hittedObject.CompareTag ("Pickable") && !handler.hasItem)
+                handler.Pick (rightRay.hittedObject.transform);
+        }
 
         if(test) {
             Hurt (testTransition);
@@ -212,7 +219,7 @@ public class PlayerController: MonoBehaviour {
         if(
             state != State.JUMPING &&
             (state == State.WALKING || state == State.IDLE) &&
-            jumpButton && !pickUp.hasItem
+            jumpButton && !handler.hasItem
         ) {
             state = State.STARTJUMPING;
             jumpTime = 0;
@@ -339,6 +346,8 @@ public class PlayerController: MonoBehaviour {
         isGrowing = true;
         growingTime = 0;
         originalScale = transform.localScale;
+        if (growUp != null)
+            growUp.Invoke((transform.localScale.x + transform.localScale.y) * 0.5f);
     }
 
     public void Hurt (float t) {
@@ -376,29 +385,50 @@ public class PlayerController: MonoBehaviour {
         public float bulk;
         public Color color;
 
+        [HideInInspector]
+        public GameObject hittedObject;
+
         public bool IsHitting (Transform transform) {
 
             Vector2 normal = Vector2.Perpendicular (direction);
             Vector2 position = transform.position;
             float mult = (transform.localScale.x + transform.localScale.y) * 0.5f;
+            Collider2D collider;
 
-            bool up = GetHit (
-                origin: position + normal * 0.5f * mult * bulk,
-                dir: direction,
-                mult: mult
-            ).collider != null;
-            bool center = GetHit (
-                origin: position + normal * 0f * mult * bulk,
-                dir: direction,
-                mult: mult
-            ).collider != null;
-            bool down = GetHit (
+            collider = GetHit (
                 origin: position - normal * 0.5f * mult * bulk,
                 dir: direction,
                 mult: mult
-            ).collider != null;
+            ).collider;
 
-            return up || center || down;
+            if (collider != null) {
+                hittedObject = collider.gameObject;
+                return true;
+            }
+
+            collider = GetHit (
+                origin: position + normal * 0f * mult * bulk,
+                dir: direction,
+                mult: mult
+            ).collider;
+
+            if (collider != null) {
+                hittedObject = collider.gameObject;
+                return true;
+            }
+
+            collider = GetHit (
+                origin: position + normal * 0.5f * mult * bulk,
+                dir: direction,
+                mult: mult
+            ).collider;
+
+            if (collider != null) {
+                hittedObject = collider.gameObject;
+                return true;
+            }
+
+            return false;
         }
 
         private RaycastHit2D GetHit (Vector2 origin, Vector2 dir, float mult) {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUp : MonoBehaviour
+public class ObjectHandler : MonoBehaviour
 {
     [SerializeField] private GameObject homeAnchor;
     [SerializeField] private GameObject homeAnchorFliped;
@@ -18,10 +18,12 @@ public class PickUp : MonoBehaviour
     private void OnEnable()
     {
         PlayerController.flipAction += Flipping;
+        PlayerController.growUp += GrowingUp;
     }
     private void OnDisable()
     {
         PlayerController.flipAction -= Flipping;
+        PlayerController.growUp -= GrowingUp;
 
     }
 
@@ -29,19 +31,23 @@ public class PickUp : MonoBehaviour
     {
         sprites = new SpriteRenderer[2];
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Pick(Transform collision)
     {
 
-        if (collision.transform.tag == "Pickable")
+        if (collision.tag == "Pickable")
         {
             if (!hasItem)
             {
-                pickedObject = collision.transform.gameObject;
+                pickedObject = collision.gameObject;
                 sprites = collision.GetComponentsInChildren<SpriteRenderer>();
                 hasItem = true;
                 SetHome();
             }          
         }
+    }
+
+    public void GrowingUp (float scale) {
+        
     }
 
     private void SetHome()
