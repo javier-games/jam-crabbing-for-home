@@ -179,9 +179,12 @@ public class PlayerController: MonoBehaviour {
 
         if (other.tag == "Checkpoint") {
             try {
-                if (!other.GetComponent<Checkpoint> ().used) {
-                    gameMode.SetCheckPoint (other.gameObject);
-                    other.GetComponent<Checkpoint> ().used = true;
+                Checkpoint check = other.GetComponent<Checkpoint> ();
+                if (check != null) {
+                    if (!check.used) {
+                        gameMode.SetCheckPoint (other.gameObject);
+                        other.GetComponent<Checkpoint> ().used = true;
+                    }
                 }
             }
             catch (System.Exception e) { Debug.LogWarning (e); }
