@@ -107,6 +107,12 @@ public class PlayerController: MonoBehaviour {
     protected bool jumpButton;
     protected bool fireButton;
 
+    public bool HasShell {
+        get {
+            return handler.hasItem;
+        }
+    }
+
 
     #endregion
 
