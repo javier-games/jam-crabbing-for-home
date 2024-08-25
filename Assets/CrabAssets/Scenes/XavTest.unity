@@ -3786,8 +3786,77 @@ Transform:
   m_Children:
   - {fileID: 250766790}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1091741105
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1092902764637171283, guid: 657eab5ab54915b43b56e15514d48aa0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092902764637171283, guid: 657eab5ab54915b43b56e15514d48aa0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092902764637171283, guid: 657eab5ab54915b43b56e15514d48aa0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092902764637171283, guid: 657eab5ab54915b43b56e15514d48aa0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092902764637171283, guid: 657eab5ab54915b43b56e15514d48aa0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092902764637171283, guid: 657eab5ab54915b43b56e15514d48aa0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092902764637171283, guid: 657eab5ab54915b43b56e15514d48aa0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092902764637171283, guid: 657eab5ab54915b43b56e15514d48aa0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092902764637171283, guid: 657eab5ab54915b43b56e15514d48aa0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092902764637171283, guid: 657eab5ab54915b43b56e15514d48aa0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092902764637171283, guid: 657eab5ab54915b43b56e15514d48aa0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557679445623914999, guid: 657eab5ab54915b43b56e15514d48aa0,
+        type: 3}
+      propertyPath: m_Name
+      value: Shell 01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 657eab5ab54915b43b56e15514d48aa0, type: 3}
 --- !u!1 &1204335812
 GameObject:
   m_ObjectHideFlags: 0
@@ -3866,7 +3935,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204335812}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.72, y: 6.4799995, z: -10}
+  m_LocalPosition: {x: -4.43, y: 2.224, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1755658590}
@@ -3957,10 +4026,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1086593782, guid: 7be2e564a323e1d40a782e2aec15e1bb, type: 3}
-      propertyPath: anchorAnimator
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3291267291063252131, guid: 7be2e564a323e1d40a782e2aec15e1bb,
         type: 3}
       propertyPath: m_Name
@@ -3974,12 +4039,12 @@ PrefabInstance:
     - target: {fileID: 3294777597895795211, guid: 7be2e564a323e1d40a782e2aec15e1bb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.72
+      value: -4.43
       objectReference: {fileID: 0}
     - target: {fileID: 3294777597895795211, guid: 7be2e564a323e1d40a782e2aec15e1bb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.48
+      value: 1.46
       objectReference: {fileID: 0}
     - target: {fileID: 3294777597895795211, guid: 7be2e564a323e1d40a782e2aec15e1bb,
         type: 3}

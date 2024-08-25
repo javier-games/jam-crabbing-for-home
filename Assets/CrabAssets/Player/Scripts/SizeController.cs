@@ -16,8 +16,8 @@ public class SizeController : MonoBehaviour
     private float _growingSize;
     private float _growingTime;
     private Vector3 _originalScale;
-    
-    public System.Action<float> Growed;
+
+    public float Scale { get; private set; } = 1;
 
     private void Awake()
     {
@@ -30,8 +30,8 @@ public class SizeController : MonoBehaviour
         var t = _growingTime / growingDuration;
 
         transform.localScale = new Vector3 (
-            _originalScale.x * (1 + widthGrowingCurve.Evaluate (t) * _growingSize),
-            _originalScale.y * (1 + heightGrowingCurve.Evaluate (t) * _growingSize),
+            _originalScale.x + (widthGrowingCurve.Evaluate (t) * _growingSize),
+            _originalScale.y + (heightGrowingCurve.Evaluate (t) * _growingSize),
             _originalScale.z
         );
 
@@ -50,6 +50,8 @@ public class SizeController : MonoBehaviour
         enabled = true;
         _growingTime = 0;
         _originalScale = transform.localScale;
-        Growed?.Invoke (_originalScale.x + size);
+        _growingSize = size;
+        Scale = _originalScale.x + size;
     }
+
 }

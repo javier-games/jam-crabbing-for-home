@@ -5,7 +5,7 @@ using UnityEngine;
 /// Player controller.
 /// </summary>
 [RequireComponent (typeof (Rigidbody2D))]
-[RequireComponent (typeof (ObjectHandler))]
+[RequireComponent (typeof (ShellHandler))]
 public class PlayerController2D: MonoBehaviour {
 
 
@@ -19,7 +19,7 @@ public class PlayerController2D: MonoBehaviour {
     private CharacterAnimationController animationController;
     private new Rigidbody2D rigidbody;
     private new Collider2D collider2D;
-    private ObjectHandler handler;
+    private ShellHandler handler;
     private Transform child;
     private SpriteRenderer render;
 
@@ -97,7 +97,7 @@ public class PlayerController2D: MonoBehaviour {
 
     public bool HasShell {
         get {
-            return handler.hasItem;
+            return handler.HasShell;
         }
     }
 
@@ -112,7 +112,7 @@ public class PlayerController2D: MonoBehaviour {
         //  Getting references.
         rigidbody = GetComponent<Rigidbody2D> ();
         collider2D = GetComponent<Collider2D> ();
-        handler = GetComponent<ObjectHandler> ();
+        handler = GetComponent<ShellHandler> ();
         child = transform.GetChild (0);
         render = child.GetComponent<SpriteRenderer> ();
         animationController = child.GetComponent<CharacterAnimationController> ();
@@ -200,19 +200,19 @@ public class PlayerController2D: MonoBehaviour {
         fireButton = Input.GetKeyDown (KeyCode.RightShift);
 
         if (Input.GetKeyDown (KeyCode.Q)) {
-            if (!handler.hasItem) {
+            if (!handler.HasShell) {
                 if (leftRay.hittedObject != null && leftRay.hittedObject.CompareTag ("Pickable")) {
-                    handler.Pick (leftRay.hittedObject.transform);
+                    // handler.Pick (leftRay.hittedObject.transform);
                     gameMode.StopNakednessTimer ();
                 }
                 else if (rightRay.hittedObject != null && rightRay.hittedObject.CompareTag ("Pickable")) {
-                    handler.Pick (rightRay.hittedObject.transform);
+                    // handler.Pick (rightRay.hittedObject.transform);
                     gameMode.StopNakednessTimer ();
                 }
             }
-            else if (handler.hasItem) {
+            else if (handler.HasShell) {
                 canBeHurt = true;
-                handler.Drop ();
+                // handler.Drop ();
                 leftRay.hittedObject = null;
                 rightRay.hittedObject = null;
                 bottomRay.hittedObject = null;
@@ -249,7 +249,7 @@ public class PlayerController2D: MonoBehaviour {
         if (
             state != State.JUMPING &&
             (state == State.WALKING || state == State.IDLE) &&
-            jumpButton && !handler.hasItem
+            jumpButton && !handler.HasShell
         ) {
             state = State.STARTJUMPING;
             jumpTime = 0;

@@ -9,6 +9,7 @@ TagManager:
   - Checkpoint
   - Pickable
   - Collectable
+  - Shell
   layers:
   - Default
   - TransparentFX

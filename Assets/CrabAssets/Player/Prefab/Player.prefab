@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 72125906223802617}
   m_Layer: 0
-  m_Name: HomeAnchor
+  m_Name: AnchorUnFlipped
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -169,11 +169,11 @@ MonoBehaviour:
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
   m_XDamping: 2.98
-  m_YDamping: 2.92
+  m_YDamping: 0.4
   m_ZDamping: 0
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.6
   m_CameraDistance: 10
   m_DeadZoneWidth: 0.14
   m_DeadZoneHeight: 0.307
@@ -252,7 +252,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3290238223257944003}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.00000047683716, z: -10}
+  m_LocalPosition: {x: 0, y: 0.76399994, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3290238222702420560}
@@ -358,6 +358,7 @@ GameObject:
   - component: {fileID: 3291267291063252134}
   - component: {fileID: 1086593782}
   - component: {fileID: 3827143895131129979}
+  - component: {fileID: 7240666976957262902}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -461,6 +462,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0a30dd27-0878-4e48-8a24-63325499a24a
     m_ActionName: SinglePlayer/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3291267291063252134}
+        m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnVerticalInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 401999e8-ea17-45a9-bc21-1c88294bfd9b
+    m_ActionName: SinglePlayer/Vertical[/Keyboard/downArrow,/Keyboard/upArrow,/Keyboard/s,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3291267291063252134}
+        m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnPickInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c070d03b-d81b-4d4f-81f6-3b4685eb0c42
+    m_ActionName: SinglePlayer/PickUp/DropDown[/Keyboard/enter]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PC
   m_DefaultActionMap: SinglePlayer
@@ -479,6 +512,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 3291267291063252128}
+  shellHandler: {fileID: 7240666976957262902}
+  shellFrictionFactor: 0.8
+  sizeController: {fileID: 3827143895131129979}
   jumpForce: 1.5
   ungroundedJumps: 2
   ungroundedSpeed: 2
@@ -500,6 +536,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 1393407363060285100}
   spriteRenderer: {fileID: 7232875219922469433}
+  anchorUnFlipped: {fileID: 340109972268752868}
+  anchorFlipped: {fileID: 7885095222829024418}
   playerController: {fileID: 3291267291063252134}
 --- !u!114 &3827143895131129979
 MonoBehaviour:
@@ -508,12 +546,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3291267291063252131}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 434e108ce612c4af095f56027c841407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growingFactor: 1.5
   growingDuration: 1
   heightGrowingCurve:
     serializedVersion: 2
@@ -617,6 +654,25 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7240666976957262902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291267291063252131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e7f984b4b756d449eed1c941aae41f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorUnFlipped: {fileID: 340109972268752868}
+  anchorFlipped: {fileID: 7885095222829024418}
+  collider2D: {fileID: 3290238222176875391}
+  rayDistance: 1
+  rayOffset: {x: 0, y: 0.43}
+  launchForce: 20
+  shellTag: Shell
 --- !u!1 &5779279518374004143
 GameObject:
   m_ObjectHideFlags: 0
@@ -5460,7 +5516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7612879155434262355
 Transform:
   m_ObjectHideFlags: 0
@@ -5506,7 +5562,7 @@ GameObject:
   m_Component:
   - component: {fileID: 12177841793857074}
   m_Layer: 0
-  m_Name: HomeAnchorFliped
+  m_Name: AnchorFlipped
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

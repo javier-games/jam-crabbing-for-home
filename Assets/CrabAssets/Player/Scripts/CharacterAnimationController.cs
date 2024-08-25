@@ -10,7 +10,15 @@ public class CharacterAnimationController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     [SerializeField] 
+    private GameObject anchorUnFlipped;
+    
+    [SerializeField] 
+    private GameObject anchorFlipped;
+
+    [SerializeField] 
     private Player.PlayerController playerController;
+
+    private const float ZeroIntensityThreshold = 0.05f;
 
     private float _currentMovement;
     private static readonly int Jump = Animator.StringToHash("Jump");
@@ -38,9 +46,11 @@ public class CharacterAnimationController : MonoBehaviour
 
     private void Update()
     {
-        spriteRenderer.flipX = _currentMovement < 0;
-        var isHighestSpeed = Mathf.Abs(_currentMovement) >= 1;
-        var isIdle = _currentMovement == 0;
+        FlipSprites(playerController.IsFlipped);
+
+        var movementIntensity = Mathf.Abs(_currentMovement);
+        var isHighestSpeed = Mathf.Abs(movementIntensity) >= 1;
+        var isIdle = movementIntensity < ZeroIntensityThreshold;
         
         if (playerController.IsFalling)
         {
@@ -78,5 +88,12 @@ public class CharacterAnimationController : MonoBehaviour
     {
         playerController.Jumped -= Jumped;
         playerController.HorizontalMove -= HorizontalMove;
+    }
+
+    private void FlipSprites(bool flipX)
+    {
+        spriteRenderer.flipX = flipX;
+        anchorUnFlipped.SetActive(!flipX);
+        anchorFlipped.SetActive(flipX);
     }
 }
