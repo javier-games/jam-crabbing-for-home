@@ -54,6 +54,16 @@ namespace CrabAssets.Scripts.Game
                     PlayerPrefs.Save();
                     break;
                 }
+
+                case ScaleModifier scaleModifier:
+                {
+                    Player.Grow(scaleModifier.Scale);
+                    if (!Player.HasShell)
+                    {
+                        // Start Timer.
+                    }
+                    break;
+                }
             }
         }
 
@@ -65,8 +75,7 @@ namespace CrabAssets.Scripts.Game
                     break;
             }
         }
-
-
+        
         private void Respawn()
         {
             CheckPoint checkPoint = null;

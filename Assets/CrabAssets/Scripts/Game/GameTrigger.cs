@@ -5,6 +5,8 @@ namespace CrabAssets.Scripts.Game
     [RequireComponent(typeof(Collider2D))]
     public abstract class GameTrigger : MonoBehaviour
     {
+        private const string PlayerTag = "Player";
+        
         [SerializeField]
         [HideInInspector] 
         private new Collider2D collider2D;
@@ -45,6 +47,25 @@ namespace CrabAssets.Scripts.Game
 
         protected abstract bool DidEnter(Collider2D other, out Component actor);
         protected abstract bool DidExit(Collider2D other, out Component actor);
+        
+        protected bool IsPlayer(Collider2D other, out Component player)
+        {
+            var otherRigidBody = other.attachedRigidbody;
+            if ((object) otherRigidBody == null)
+            {
+                player = null;
+                return false;
+            }
+        
+            if (!otherRigidBody.CompareTag(PlayerTag))
+            {
+                player = null;
+                return false;
+            }
+        
+            player = otherRigidBody; // not required tho.
+            return true;
+        }
     }
     
     public delegate void OnTriggerInEvent(GameTrigger trigger, Component actor);

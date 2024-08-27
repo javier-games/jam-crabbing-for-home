@@ -4,8 +4,6 @@ namespace CrabAssets.Scripts.Game
 {
     public class CheckPoint : GameTrigger
     {
-        private const string PlayerTag = "Player";
-
         [SerializeField] 
         private Transform spawnPosition;
     
@@ -36,25 +34,6 @@ namespace CrabAssets.Scripts.Game
         public void PlaceActor(Transform actorTransform)
         {
             actorTransform.SetPositionAndRotation(spawnPosition.position, Quaternion.identity);
-        }
-
-        private static bool IsPlayer(Collider2D other, out Component player)
-        {
-            var otherRigidBody = other.attachedRigidbody;
-            if ((object) otherRigidBody == null)
-            {
-                player = null;
-                return false;
-            }
-        
-            if (!otherRigidBody.CompareTag(PlayerTag))
-            {
-                player = null;
-                return false;
-            }
-        
-            player = otherRigidBody; // not required tho.
-            return true;
         }
     }
 }

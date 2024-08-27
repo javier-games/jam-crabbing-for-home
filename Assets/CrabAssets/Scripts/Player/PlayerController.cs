@@ -244,20 +244,22 @@ namespace CrabAssets.Scripts.Player
         }
 
         #endregion
-        
 
+
+#if UNITY_EDITOR
+        
         [ContextMenu("GrowUp")]
-        public void GrowUp()
-        {
-            sizeController.Grow(0.25f);
-            shellHandler.TryToGrow(sizeController.Scale);
-        }
+        public void GrowUp() => Grow(0.25f);
 
         [ContextMenu("GrowDown")]
-        public void GrowDown()
+        public void GrowDown() => Grow(-0.25f);
+        
+#endif
+
+        public void Grow(float scale)
         {
-            sizeController.Grow(-0.25f);
-            shellHandler.TryToGrow(sizeController.Scale);
+            sizeController.Grow(scale);
+            HasShell = shellHandler.TryToGrow(sizeController.Scale);
         }
         
     }
