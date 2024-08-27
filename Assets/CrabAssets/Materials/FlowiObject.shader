@@ -4,10 +4,9 @@
 		_MainTex("Base (RGB)", 2D) = "white" {}
 	}
 		SubShader{
-			Tags {  "RenderType" = "Transparent" "Queue" = "Transparent" }
+			Tags {  "RenderType" = "Transparent" "Queue" = "Overlay" }
 			ZWrite Off
 			LOD 200
-
 			Blend SrcAlpha OneMinusSrcAlpha
 
 			CGPROGRAM

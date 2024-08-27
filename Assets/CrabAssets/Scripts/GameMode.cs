@@ -164,14 +164,14 @@ public class GameMode: MonoBehaviour {
 
     public void SetCheckPoint (GameObject overlappedCheckpoint) {
 
-        Checkpoint check = overlappedCheckpoint.GetComponent<Checkpoint> ();
+        CheckPoint check = overlappedCheckpoint.GetComponent<CheckPoint> ();
         if (check != null) {
-            if (check.setLevel) {
-
-                StopAllCoroutines ();
-                Instantiate (finalprefab);
-                return;
-            }
+            // if (check.setLevel) {
+            //
+            //     StopAllCoroutines ();
+            //     Instantiate (finalprefab);
+            //     return;
+            // }
 
         }
 
@@ -212,11 +212,11 @@ public class GameMode: MonoBehaviour {
     public void GotCollectable () {
         StopGrowthTimer ();
         currentGrowthTimerValue = GrowthtimeLeft;
-        if (player.GetComponent<PlayerController2D> ().HasShell == false) {
-            startGrowthTimer = StartCoroutine (StartGrowTimer ());
-        }
-        else {
-        }
+        // if (player.GetComponent<PlayerController2D> ().HasShell == false) {
+        //     startGrowthTimer = StartCoroutine (StartGrowTimer ());
+        // }
+        // else {
+        // }
 
     }
 }
