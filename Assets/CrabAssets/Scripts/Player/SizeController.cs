@@ -19,6 +19,8 @@ namespace CrabAssets.Scripts.Player
         private float _growingTime;
         private Vector3 _originalScale;
 
+        private System.Action _onEndResizing;
+
         public float Scale { get; private set; } = 1;
 
         private void Awake()
@@ -39,6 +41,7 @@ namespace CrabAssets.Scripts.Player
 
             if (!(_growingTime > growingDuration)) return;
             _growingTime = 0;
+            _onEndResizing?.Invoke();
             enabled = false;
         }
 
@@ -47,8 +50,9 @@ namespace CrabAssets.Scripts.Player
             transform.localScale = Vector3.one;
         }
     
-        public void Grow (float size)
+        public void Grow (float size, System.Action onEndResizingCallback)
         {
+            _onEndResizing = onEndResizingCallback;
             enabled = true;
             _growingTime = 0;
             _originalScale = transform.localScale;

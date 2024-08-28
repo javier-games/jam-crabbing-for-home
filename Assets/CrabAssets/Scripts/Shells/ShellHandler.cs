@@ -27,6 +27,7 @@ namespace CrabAssets.Scripts.Shells
         private string shellTag;
 
         private ShellController _shellController;
+        private Transform _previousShellAnchor;
 
         private ShellController ShellController
         {
@@ -166,20 +167,33 @@ namespace CrabAssets.Scripts.Shells
             ShellController = null;
         }
         
-        public bool TryToGrow (float scale) {
+        public void HoldShellScale (float scale) {
 
             if (!HasShell)
             {
-                return false;
+                return;
             }
-        
-            if (ShellController.TryToGrow(scale))
+            
+            if (!ShellController.TryToGrow(scale))
             {
-                return true;
+                ShellController = null;
+                return;
             }
 
-            ShellController = null;
-            return false;
+            _previousShellAnchor = ShellController.transform.parent;
+            ShellController.transform.SetParent(null);
+        }
+        
+
+        public void ReleaseShellScale()
+        {
+            if (!HasShell)
+            {
+                return;
+            }
+            
+            ShellController.transform.SetParent(_previousShellAnchor);
+            _previousShellAnchor = null;
         }
         
         public void Flip (bool flip) {

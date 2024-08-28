@@ -258,8 +258,8 @@ namespace CrabAssets.Scripts.Player
 
         public void Grow(float scale)
         {
-            sizeController.Grow(scale);
-            shellHandler.TryToGrow(sizeController.Scale);
+            shellHandler.HoldShellScale(sizeController.Scale + scale);
+            sizeController.Grow(scale, shellHandler.ReleaseShellScale);
         }
         
         private void OnKilled()

@@ -1,6 +1,8 @@
-﻿using CrabAssets.Scripts.Player;
+﻿using System.Collections;
+using CrabAssets.Scripts.Player;
 using CrabAssets.Scripts.Shells;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace CrabAssets.Scripts.Game
@@ -107,7 +109,7 @@ namespace CrabAssets.Scripts.Game
             {
                 case CheckPoint checkPoint:
                 {
-                    PlayerPrefs.SetInt(LastCheckPointKey, checkPoint.GetHashCode()); 
+                    PlayerPrefs.SetString(LastCheckPointKey, checkPoint.gameObject.name); 
                     PlayerPrefs.SetFloat(LastPlayerScaleKey, Player.transform.localScale.x);
                     PlayerPrefs.Save();
                     break;
@@ -129,6 +131,12 @@ namespace CrabAssets.Scripts.Game
                     RadiationTimer.IncreaseCurrentTime(radiationModifier.RadiationAmount);
                     break;
                 }
+
+                case EndGameTrigger endGameTrigger:
+                {
+                    StartCoroutine(LoadSceneCoroutine("EndScene"));
+                    break;
+                }
             }
         }
 
@@ -146,12 +154,12 @@ namespace CrabAssets.Scripts.Game
             CheckPoint checkPoint = null;
             if (PlayerPrefs.HasKey(LastCheckPointKey))
             {
-                var hashCode = PlayerPrefs.GetInt(LastCheckPointKey);
+                var checkPointName = PlayerPrefs.GetString(LastCheckPointKey);
                 var checkPoints = FindObjectsOfType<CheckPoint>();
 
                 for (var i = 0; i < checkPoints.Length; i++)
                 {
-                    if (checkPoints[i].GetHashCode() != hashCode)
+                    if (checkPoints[i].name != checkPointName)
                     {
                         continue;
                     }
@@ -187,8 +195,7 @@ namespace CrabAssets.Scripts.Game
         [ContextMenu("Clear PlayerPrefs")]
         public void ClearPlayerPrefs()
         {
-            PlayerPrefs.DeleteKey(LastPlayerScaleKey);
-            PlayerPrefs.DeleteKey(LastCheckPointKey);
+            PlayerPrefs.DeleteAll();
         }
 
         private void Kill()
@@ -196,6 +203,16 @@ namespace CrabAssets.Scripts.Game
             Player.Killed?.Invoke();
             RadiationTimer.Stop(this);
             LiveTimer.Stop(this);
+            StartCoroutine(LoadSceneCoroutine("MenuScene"));
+        }
+
+        private IEnumerator LoadSceneCoroutine(string scene)
+        {
+            RadiationTimer.Stop(this);
+            LiveTimer.Stop(this);
+            yield return new WaitForSeconds(3);
+            ClearPlayerPrefs();
+            SceneManager.LoadScene(scene);
         }
     }
 }
