@@ -61,6 +61,26 @@ namespace CrabAssets.Scripts.Game
             monoBehaviour.StopCoroutine(_coroutine);
             _coroutine = null;
         }
+
+        public void IncreaseCurrentTime(float time)
+        {
+            if (_coroutine == null)
+            {
+                return;
+            }
+
+            _currentTime -= time;
+
+            if (_currentTime > _totalTime)
+            {
+                _currentTime = _totalTime;
+            }
+
+            else if(_currentTime < 0)
+            {
+                _currentTime = 0;
+            }
+        }
     }
 
     public delegate void TimeInEvent();

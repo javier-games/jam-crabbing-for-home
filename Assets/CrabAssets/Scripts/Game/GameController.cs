@@ -1,6 +1,7 @@
 ﻿using CrabAssets.Scripts.Player;
 using CrabAssets.Scripts.Shells;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CrabAssets.Scripts.Game
 {
@@ -17,19 +18,32 @@ namespace CrabAssets.Scripts.Game
 
         [Header("Live Timer")]
         [SerializeField] private float liveTime;
-        [SerializeField] private bool startLimeTimingOnStart;
+        [SerializeField] private bool startLiveTimingOnStart;
+
+        [Header("Radiation Timer")] 
+        [SerializeField]
+        private float radiationTime;
+        [SerializeField] 
+        private float radiationSizeIncrement = 0.25f;
 
         public static TimeInEvent liveTimeIn;
         public static TimeOutEvent liveTimeOut;
         public static TimerUpdateEvent liveTimeUpdate;
+
+        public static TimeInEvent radiationTimeIn;
+        public static TimeOutEvent radiationTimeOut;
+        public static TimerUpdateEvent radiationTimeUpdate;
         
         private PlayerController Player { get; set; }
         private Timer LiveTimer { get; set; }
+        private Timer RadiationTimer { get; set; }
 
         private void Awake()
         {
-            liveTimeOut += LiveTimeOut;
+            liveTimeOut += Kill;
             LiveTimer = new Timer(liveTime, liveTimeIn, liveTimeOut, liveTimeUpdate);
+            radiationTimeOut += RadiationTimeOut;
+            RadiationTimer = new Timer(radiationTime, radiationTimeIn, radiationTimeOut, radiationTimeUpdate);
             
             var inScenePlayer = FindObjectOfType<PlayerController>();
             
@@ -49,9 +63,11 @@ namespace CrabAssets.Scripts.Game
 
         }
 
-        private void LiveTimeOut()
+        private void RadiationTimeOut()
         {
-            Player.Killed?.Invoke();
+            Player.Grow(radiationSizeIncrement);
+            RadiationTimer.Stop(this);
+            RadiationTimer.Start(this);
         }
 
         private void ShellChanged(ShellController shell)
@@ -69,7 +85,7 @@ namespace CrabAssets.Scripts.Game
 
         private void Start()
         {
-            if (startLimeTimingOnStart)
+            if (startLiveTimingOnStart)
             {
                 LiveTimer.Start(this);
             }
@@ -100,6 +116,17 @@ namespace CrabAssets.Scripts.Game
                 case ScaleModifier scaleModifier:
                 {
                     Player.Grow(scaleModifier.Scale);
+                    break;
+                }
+
+                case RadiationModifier radiationModifier:
+                {
+                    if (!RadiationTimer.IsRunning)
+                    {
+                        RadiationTimer.Start(this);
+                    }
+                    
+                    RadiationTimer.IncreaseCurrentTime(radiationModifier.RadiationAmount);
                     break;
                 }
             }
@@ -136,6 +163,16 @@ namespace CrabAssets.Scripts.Game
             if ((object) checkPoint != null)
             {
                 checkPoint.PlaceActor(Player.transform);
+                
+                if (!RadiationTimer.IsRunning)
+                {
+                    RadiationTimer.Start(this);
+                }
+
+                if (!LiveTimer.IsRunning)
+                {
+                    LiveTimer.Start(this);
+                }
             }
             else
             {
@@ -152,6 +189,13 @@ namespace CrabAssets.Scripts.Game
         {
             PlayerPrefs.DeleteKey(LastPlayerScaleKey);
             PlayerPrefs.DeleteKey(LastCheckPointKey);
+        }
+
+        private void Kill()
+        {
+            Player.Killed?.Invoke();
+            RadiationTimer.Stop(this);
+            LiveTimer.Stop(this);
         }
     }
 }

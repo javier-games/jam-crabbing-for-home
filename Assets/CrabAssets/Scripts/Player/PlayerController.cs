@@ -10,7 +10,6 @@ namespace CrabAssets.Scripts.Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField]
-        
         private Rigidbody2D rigidBody2D;
 
         [SerializeField] 
