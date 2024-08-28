@@ -12,6 +12,9 @@ namespace CrabAssets.Scripts.Player
         [SerializeField]
         private Rigidbody2D rigidBody2D;
 
+        [SerializeField]
+        private new Collider2D collider2D;
+
         [SerializeField] 
         private ShellHandler shellHandler;
 
@@ -54,6 +57,28 @@ namespace CrabAssets.Scripts.Player
         private int _jumpCount;
         private bool _hasShell;
         private Vector2 _dPad;
+        private readonly List<ContactPoint2D> _contacts = new List<ContactPoint2D>();
+        
+        private ContactFilter2D _leftContact = new ContactFilter2D()
+        {
+            useNormalAngle = true,
+            minNormalAngle = -45,
+            maxNormalAngle = 45
+        };
+
+        private readonly ContactFilter2D _rightContact = new ContactFilter2D()
+        {
+            useNormalAngle = true,
+            minNormalAngle = 115,
+            maxNormalAngle = 225,
+        };
+
+        private readonly ContactFilter2D _bottomContact = new ContactFilter2D()
+        {
+            useNormalAngle = true,
+            minNormalAngle = 45,
+            maxNormalAngle = 115
+        };
         
         private int HorizontalInputTarget { get; set; }
         public bool IsFlipped { get; private set; }
@@ -86,29 +111,16 @@ namespace CrabAssets.Scripts.Player
         
         private void FixedUpdate()
         {
-            HorizontalMovement();
-        }
-        
-        // Detects the ground and rigid objects consider as ground.
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.isTrigger)
-            {
-                return;
-            }
-            
-            IsGrounded = true;
-            _jumpCount = ungroundedJumps;
-        }
+            var touchingRight = collider2D.GetContacts(_rightContact, _contacts) > 0;
+            var touchingLeft = collider2D.GetContacts(_leftContact, _contacts) > 0;
+            var touchingBottom = collider2D.GetContacts(_bottomContact, _contacts) > 0;
 
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (other.isTrigger)
+            IsGrounded = touchingLeft || touchingRight || touchingBottom;
+            if (IsGrounded)
             {
-                return;
+                _jumpCount = ungroundedJumps;
             }
-            
-            IsGrounded = false;
+            HorizontalMovement();
         }
 
         public void OnHorizontalInput(InputAction.CallbackContext context)
@@ -253,13 +265,7 @@ namespace CrabAssets.Scripts.Player
         private void OnKilled()
         {
             rigidBody2D.AddForce(Vector2.up * 2, ForceMode2D.Impulse);
-            var colliders = new List<Collider2D>();
-            var count = rigidBody2D.GetAttachedColliders(colliders);
-
-            foreach (var collider in colliders)
-            {
-                collider.enabled = false;
-            }
+            collider2D.enabled = false;
         }
     }
 }

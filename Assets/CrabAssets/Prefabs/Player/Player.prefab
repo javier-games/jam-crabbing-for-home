@@ -321,13 +321,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3290238224124908249}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3290238223023770886}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &3290238224124908255
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -342,8 +342,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.1, y: 0.3}
-  m_Direction: 0
+  m_Size: {x: 0.3, y: 0.1}
+  m_Direction: 1
 --- !u!1 &3291267291063252131
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,6 +513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody2D: {fileID: 3291267291063252128}
+  collider2D: {fileID: 3290238222176875391}
   shellHandler: {fileID: 7240666976957262902}
   shellFrictionFactor: 0.8
   sizeController: {fileID: 3827143895131129979}
