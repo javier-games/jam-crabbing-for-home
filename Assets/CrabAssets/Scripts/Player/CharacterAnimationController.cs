@@ -34,6 +34,7 @@ namespace CrabAssets.Scripts.Player
         {
             playerController.Jumped += Jumped;
             playerController.HorizontalMove += HorizontalMove;
+            playerController.Killed += Kill;
         }
 
         private void Jumped()
@@ -90,6 +91,7 @@ namespace CrabAssets.Scripts.Player
         {
             playerController.Jumped -= Jumped;
             playerController.HorizontalMove -= HorizontalMove;
+            playerController.Killed -= Kill;
         }
 
         private void FlipSprites(bool flipX)

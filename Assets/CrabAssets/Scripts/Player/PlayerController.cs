@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using CrabAssets.Scripts.Shells;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,8 +10,8 @@ namespace CrabAssets.Scripts.Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField]
-        [HideInInspector]
-        private new Rigidbody2D rigidbody2D;
+        
+        private Rigidbody2D rigidBody2D;
 
         [SerializeField] 
         private ShellHandler shellHandler;
@@ -44,7 +46,7 @@ namespace CrabAssets.Scripts.Player
 
         public System.Action Jumped;
         public System.Action<float> HorizontalMove;
-        public System.Action<bool> HasShellChanged;
+        public System.Action Killed;
         
         private float _currentHorizontalInput;
         private float _currentVelocity;
@@ -52,42 +54,37 @@ namespace CrabAssets.Scripts.Player
         private float _currentAcceleration;
         private int _jumpCount;
         private bool _hasShell;
-
-        private int HorizontalInputTarget { get; set; }
-
         private Vector2 _dPad;
         
+        private int HorizontalInputTarget { get; set; }
         public bool IsFlipped { get; private set; }
-
         public bool IsGrounded { get; private set; }
+        public bool HasShell => shellHandler.HasShell;
+        public bool IsFalling => rigidBody2D && rigidBody2D.velocity.y < 0;
 
-        public bool HasShell
+        public ShellChangeEvent ShellChanged
         {
-            get => _hasShell;
-            set
-            {
-                if (value == _hasShell)
-                {
-                    return;
-                }
-
-                _hasShell = value;
-                HasShellChanged?.Invoke(_hasShell);
-            }
+            get => shellHandler.ShellChanged;
+            set => shellHandler.ShellChanged = value;
         }
-
-        public bool IsFalling => rigidbody2D && rigidbody2D.velocity.y < 0;
-
-
-        #region Event Methods
-
+        
 #if UNITY_EDITOR
         public void Reset()
         {
-            rigidbody2D = GetComponent<Rigidbody2D>();
+            rigidBody2D = GetComponent<Rigidbody2D>();
         }
 #endif
 
+        private void OnEnable()
+        {
+            Killed += OnKilled;
+        }
+
+        private void OnDisable()
+        {
+            Killed -= OnKilled;
+        }
+        
         private void FixedUpdate()
         {
             HorizontalMovement();
@@ -147,16 +144,11 @@ namespace CrabAssets.Scripts.Player
             }
         }
 
-        #endregion
-        
-
-        #region Methods
-
         private void HorizontalMovement()
         {
-            var inertia = 0f;
-            var targetSpeed = 0f;
-            
+            float inertia;
+            float targetSpeed;
+
             if (IsGrounded)
             {
                 inertia = groundedInertia;
@@ -192,9 +184,9 @@ namespace CrabAssets.Scripts.Player
                 speedSmoothness
             );
             
-            rigidbody2D.velocity = new Vector2(
+            rigidBody2D.velocity = new Vector2(
                 x: _currentHorizontalInput * _currentSpeed * (HasShell ? shellFrictionFactor : 1), 
-                y: rigidbody2D.velocity.y
+                y: rigidBody2D.velocity.y
             );
             
             HorizontalMove?.Invoke(_currentHorizontalInput);
@@ -212,7 +204,7 @@ namespace CrabAssets.Scripts.Player
                 _jumpCount--;
             }
             
-            rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rigidBody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             Jumped?.Invoke();
         }
 
@@ -225,11 +217,10 @@ namespace CrabAssets.Scripts.Player
             if (HasShell)
             {
                 shellHandler.DropOut(direction, IsGrounded);
-                HasShell = false;
             }
             else
             {
-                HasShell = shellHandler.TryPickUp(direction, IsFlipped);
+                shellHandler.TryPickUp(direction, IsFlipped);
             }
         }
 
@@ -240,10 +231,8 @@ namespace CrabAssets.Scripts.Player
                 Pick();
             }
 
-            HasShell = shellHandler.TryPickUp(shell, IsFlipped);
+            shellHandler.TryPickUp(shell, IsFlipped);
         }
-
-        #endregion
 
 
 #if UNITY_EDITOR
@@ -259,8 +248,19 @@ namespace CrabAssets.Scripts.Player
         public void Grow(float scale)
         {
             sizeController.Grow(scale);
-            HasShell = shellHandler.TryToGrow(sizeController.Scale);
+            shellHandler.TryToGrow(sizeController.Scale);
         }
         
+        private void OnKilled()
+        {
+            rigidBody2D.AddForce(Vector2.up * 2, ForceMode2D.Impulse);
+            var colliders = new List<Collider2D>();
+            var count = rigidBody2D.GetAttachedColliders(colliders);
+
+            foreach (var collider in colliders)
+            {
+                collider.enabled = false;
+            }
+        }
     }
 }

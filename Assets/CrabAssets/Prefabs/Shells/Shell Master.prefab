@@ -313,7 +313,7 @@ MonoBehaviour:
   minResistance: 1
   maxResistance: 2
   destructionDelay: 4
-  rigidbody2D: {fileID: 5685506973274352510}
+  rigidBody2D: {fileID: 5685506973274352510}
 --- !u!114 &2042432658328097602
 MonoBehaviour:
   m_ObjectHideFlags: 0

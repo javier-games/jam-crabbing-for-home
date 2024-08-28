@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 1086593782}
   - component: {fileID: 3827143895131129979}
   - component: {fileID: 7240666976957262902}
+  - component: {fileID: 4569156737364496130}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -511,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d619fc7bdf207aa419a49b3e443d5fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody2D: {fileID: 3291267291063252128}
+  rigidBody2D: {fileID: 3291267291063252128}
   shellHandler: {fileID: 7240666976957262902}
   shellFrictionFactor: 0.8
   sizeController: {fileID: 3827143895131129979}
@@ -673,6 +674,20 @@ MonoBehaviour:
   rayOffset: {x: 0, y: 0.43}
   launchForce: 20
   shellTag: Shell
+--- !u!114 &4569156737364496130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291267291063252131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90674f7516c24a1da99ba029b3f9fb6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 3290238223257944000}
+  playerController: {fileID: 3291267291063252134}
 --- !u!1 &5779279518374004143
 GameObject:
   m_ObjectHideFlags: 0

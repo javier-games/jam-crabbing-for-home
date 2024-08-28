@@ -11,9 +11,8 @@ namespace CrabAssets.Scripts.Shells
 
         [SerializeField] private float minResistance = 1;
         [SerializeField] private float maxResistance = 2;
-        [SerializeField] private float destructionDelay = 4;
-
-        [SerializeField] private new Rigidbody2D rigidbody2D;
+        [SerializeField] private float destructionDelay = 4; 
+        [SerializeField] private Rigidbody2D rigidBody2D;
 
         private bool _flip;
 
@@ -31,13 +30,13 @@ namespace CrabAssets.Scripts.Shells
         private void OnEnable()
         {
             animationController.Picked(false);
-            rigidbody2D.simulated = true;
+            rigidBody2D.simulated = true;
         }
 
         private void OnDisable()
         {
             animationController.Picked(true);
-            rigidbody2D.simulated = false;
+            rigidBody2D.simulated = false;
         }
 
         public bool TryToGrow(float scale)
@@ -54,7 +53,7 @@ namespace CrabAssets.Scripts.Shells
                 return false;
             }
 
-            return scale >= minResistance;
+            return true;
         }
 
         public bool CanBePicked(Vector2 scale)
@@ -65,7 +64,7 @@ namespace CrabAssets.Scripts.Shells
         public void Throw(Vector2 force)
         {
             enabled = true;
-            rigidbody2D.AddForce(force, ForceMode2D.Impulse);
+            rigidBody2D.AddForce(force, ForceMode2D.Impulse);
         }
 
         private void Break()

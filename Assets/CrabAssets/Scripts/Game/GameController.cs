@@ -9,20 +9,35 @@ namespace CrabAssets.Scripts.Game
         private const string LastCheckPointKey = "CheckPoint-Last";
         private const string LastPlayerScaleKey = "CheckPoint-Scale";
 
+        [Header("Spawning")]
         [SerializeField] private PlayerController playerPrefab;
         [SerializeField] private ShellController startingShellPrefab;
         [SerializeField] private Transform startPoint;
         [SerializeField] private float initialScale = 1f;
+
+        [Header("Live Timer")]
+        [SerializeField] private float liveTime;
+        [SerializeField] private bool startLimeTimingOnStart;
+
+        public static TimeInEvent liveTimeIn;
+        public static TimeOutEvent liveTimeOut;
+        public static TimerUpdateEvent liveTimeUpdate;
         
         private PlayerController Player { get; set; }
+        private Timer LiveTimer { get; set; }
 
         private void Awake()
         {
+            liveTimeOut += LiveTimeOut;
+            LiveTimer = new Timer(liveTime, liveTimeIn, liveTimeOut, liveTimeUpdate);
+            
             var inScenePlayer = FindObjectOfType<PlayerController>();
             
             Player = inScenePlayer == null 
                 ? Instantiate(playerPrefab) 
                 : inScenePlayer;
+            
+            Player.ShellChanged += ShellChanged;
 
             Respawn();
 
@@ -30,6 +45,33 @@ namespace CrabAssets.Scripts.Game
             {
                 var shell = Instantiate(startingShellPrefab);
                 Player.PickUp(shell);
+            }
+
+        }
+
+        private void LiveTimeOut()
+        {
+            Player.Killed?.Invoke();
+        }
+
+        private void ShellChanged(ShellController shell)
+        {
+            if (Player.HasShell)
+            {
+                LiveTimer.Stop(this);
+                liveTimeUpdate?.Invoke(1);
+            }
+            else if (!LiveTimer.IsRunning) 
+            {
+                LiveTimer.Start(this);
+            }
+        }
+
+        private void Start()
+        {
+            if (startLimeTimingOnStart)
+            {
+                LiveTimer.Start(this);
             }
         }
 
@@ -49,7 +91,7 @@ namespace CrabAssets.Scripts.Game
             {
                 case CheckPoint checkPoint:
                 {
-                    PlayerPrefs.SetInt(LastCheckPointKey, trigger.GetHashCode()); 
+                    PlayerPrefs.SetInt(LastCheckPointKey, checkPoint.GetHashCode()); 
                     PlayerPrefs.SetFloat(LastPlayerScaleKey, Player.transform.localScale.x);
                     PlayerPrefs.Save();
                     break;
@@ -58,10 +100,6 @@ namespace CrabAssets.Scripts.Game
                 case ScaleModifier scaleModifier:
                 {
                     Player.Grow(scaleModifier.Scale);
-                    if (!Player.HasShell)
-                    {
-                        // Start Timer.
-                    }
                     break;
                 }
             }
@@ -69,11 +107,11 @@ namespace CrabAssets.Scripts.Game
 
         private void OnTriggerOut(GameTrigger trigger, Component actor)
         {
-            switch (trigger)
-            {
-                case CheckPoint checkPoint:
-                    break;
-            }
+            // switch (trigger)
+            // {
+            //     case CheckPoint checkPoint:
+            //         break;
+            // }
         }
         
         private void Respawn()

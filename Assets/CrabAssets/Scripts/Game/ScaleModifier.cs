@@ -11,9 +11,6 @@ namespace CrabAssets.Scripts.Game
         [SerializeField]
         private bool disableOnTrigger;
 
-        [SerializeField] 
-        private bool activateClock = true;
-
         public float Scale => scaleToAdd;
         
         protected override bool DidEnter(Collider2D other, out Component actor)

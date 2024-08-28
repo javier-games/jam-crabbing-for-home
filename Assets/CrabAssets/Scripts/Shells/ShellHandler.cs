@@ -1,16 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace CrabAssets.Scripts.Shells
 {
     public class ShellHandler: MonoBehaviour {
     
-        [FormerlySerializedAs("homeAnchor")] 
         [SerializeField] 
         private GameObject anchorUnFlipped;
 
-        [FormerlySerializedAs("homeAnchorFliped")] 
         [SerializeField]
         private GameObject anchorFlipped;
 
@@ -30,18 +27,33 @@ namespace CrabAssets.Scripts.Shells
         private string shellTag;
 
         private ShellController _shellController;
-    
-        private ShellController ShellController { get; set; }
+
+        private ShellController ShellController
+        {
+            get => _shellController;
+            set
+            {
+                if (_shellController == value)
+                {
+                    return;
+                }
+
+                _shellController = value;
+                ShellChanged?.Invoke(value);
+            }
+        }
 
         public bool HasShell => (object) ShellController != null;
 
+        public ShellChangeEvent ShellChanged { get; set; }
 
-        private List<ContactPoint2D> _contacts = new List<ContactPoint2D>();// = new List<ContactPoint2D>();
-        private List<ContactMatch> _matches = new List<ContactMatch>();
-        struct ContactMatch
+        private readonly List<ContactPoint2D> _contacts = new List<ContactPoint2D>();// = new List<ContactPoint2D>();
+        private readonly List<ContactMatch> _matches = new List<ContactMatch>();
+
+        private struct ContactMatch
         {
-            public int index;
-            public float match;
+            public int Index;
+            public float Match;
         }
 
         public bool TryPickUp(Vector2 direction, bool isFlipped)
@@ -55,42 +67,36 @@ namespace CrabAssets.Scripts.Shells
                 var contactRigidBody = contact.collider.attachedRigidbody;
                 if ((object)contactRigidBody == null || !contactRigidBody.CompareTag(shellTag))
                 {
-                    Debug.Log($"contact rigid body {contactRigidBody}");
                     continue;
                 }
 
                 var matchValue = Mathf.Abs(Vector2.Dot(contact.normal, direction));
-                _matches.Add(new ContactMatch(){index = i, match = matchValue});
+                _matches.Add(new ContactMatch(){Index = i, Match = matchValue});
             }
 
             if (_matches.Count > 1)
             {
-                _matches.Sort(((a, b) => a.match.CompareTo(b.match)));
+                _matches.Sort(((a, b) => a.Match.CompareTo(b.Match)));
             }
         
             for (var i = 0; i < _matches.Count; i++)
             {
-                if (!TryGetShellFromCollider(_contacts[_matches[i].index].collider, out var collidedShell))
+                if (!TryGetShellFromCollider(_contacts[_matches[i].Index].collider, out var collidedShell))
                 {
                     continue;
                 }
             
                 _matches.Clear();
-            
-                Debug.Log($"shell {collidedShell}");
+                
                 return TryPickUp(collidedShell, isFlipped);
             }
         
             _matches.Clear();
         
-            var raycast = Physics2D.Raycast(transform.position + new Vector3(rayOffset.x, rayOffset.y), direction, rayDistance);
+            var rayCast = Physics2D.Raycast(transform.position + new Vector3(rayOffset.x, rayOffset.y), direction, rayDistance);
 
-            if (!TryGetShellFromCollider(raycast.collider, out var rayCastedShell))
-            {
-                return false;
-            }
-        
-            return TryPickUp(rayCastedShell, isFlipped);
+            return TryGetShellFromCollider(rayCast.collider, out var rayCastedShell) 
+                   && TryPickUp(rayCastedShell, isFlipped);
         }
     
         private bool TryGetShellFromCollider(Collider2D other, out ShellController shell)
@@ -159,14 +165,12 @@ namespace CrabAssets.Scripts.Shells
         
             ShellController = null;
         }
-    
-    
-    
+        
         public bool TryToGrow (float scale) {
 
             if (!HasShell)
             {
-                return true;
+                return false;
             }
         
             if (ShellController.TryToGrow(scale))
@@ -177,8 +181,7 @@ namespace CrabAssets.Scripts.Shells
             ShellController = null;
             return false;
         }
-    
-    
+        
         public void Flip (bool flip) {
             if (!HasShell)
             {
@@ -190,6 +193,7 @@ namespace CrabAssets.Scripts.Shells
             ShellController.transform.localPosition = Vector3.zero;
             ShellController.transform.localRotation = Quaternion.identity;
         }
-
     }
+
+    public delegate void ShellChangeEvent(ShellController shell);
 }
