@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,17 +9,47 @@ namespace CrabAssets.Scripts.UI
 
         [SerializeField] private Button startButton;
         [SerializeField] private Button resetButton;
+        [SerializeField] private Button menuButton;
 
         private void OnEnable()
         {
-            startButton.onClick.AddListener(StartGame);
-            startButton.onClick.AddListener(ResetGame);
+            if (startButton)
+            {
+                startButton.onClick.AddListener(StartGame);
+            }
+
+            if (resetButton)
+            {
+                resetButton.onClick.AddListener(ResetGame);
+            }
+
+            if (menuButton)
+            {
+                menuButton.onClick.AddListener(MenuGame);
+            }
         }
-        
+
         private void OnDisable()
         {
-            startButton.onClick.RemoveListener(StartGame);
-            startButton.onClick.RemoveListener(ResetGame);
+            if (startButton)
+            {
+                startButton.onClick.RemoveListener(StartGame);
+            }
+
+            if (resetButton)
+            {
+                resetButton.onClick.RemoveListener(ResetGame);
+            }
+
+            if (menuButton)
+            {
+                menuButton.onClick.RemoveListener(MenuGame);
+            }
+        }
+
+        private void MenuGame()
+        {
+            SceneManager.LoadScene("MenuScene");
         }
 
         private void ResetGame()
