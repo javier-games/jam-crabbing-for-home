@@ -4,21 +4,18 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
-  - Gameplay camera
   - Checkpoint
-  - Pickable
-  - Collectable
+  - Shell
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PostProcessing
   - Water
   - UI
   - 
   - 
-  - PostProcessing
+  - 
   - 
   - 
   - 
