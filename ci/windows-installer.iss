@@ -2,10 +2,10 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Crabbing for Home"
-#define MyAppVersion "1.0.0-alpha.1"
+#define MyAppVersion "1.0.0-alpha.2"
 #define MyAppPublisher "Javier García"
 #define MyAppURL "https://javier-games.itch.io/crabbing-for-home"
-#define MyAppExeName "CrabbingForHome.exe"
+#define MyAppExeName "Crabbing for Home.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -50,7 +50,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "D:\Projects\jam-crabbing-for-home\Build\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Projects\jam-crabbing-for-home\Build\UnityCrashHandler64.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Projects\jam-crabbing-for-home\Build\UnityPlayer.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Projects\jam-crabbing-for-home\Build\CrabbingForHome_Data\*"; DestDir: "{app}\CrabbingForHome_Data"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Projects\jam-crabbing-for-home\Build\Crabbing for Home_Data\*"; DestDir: "{app}\Crabbing for Home_Data"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "D:\Projects\jam-crabbing-for-home\Build\MonoBleedingEdge\*"; DestDir: "{app}\MonoBleedingEdge"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
