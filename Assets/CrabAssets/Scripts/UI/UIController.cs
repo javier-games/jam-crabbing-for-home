@@ -37,7 +37,9 @@ namespace CrabAssets.Scripts.UI
         private void OnDestroy()
         {
             GameController.liveTimeIn -= LiveTimeIn;
-            GameController.liveTimeUpdate += LiveTimeUpdate;
+            GameController.liveTimeUpdate -= LiveTimeUpdate;
+            GameController.radiationTimeIn -= RadiationTimeIn;
+            GameController.radiationTimeUpdate -= RadiationTimeUpdate;
         }
 
         private void LiveTimeIn()

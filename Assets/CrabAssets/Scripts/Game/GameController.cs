@@ -3,7 +3,6 @@ using CrabAssets.Scripts.Player;
 using CrabAssets.Scripts.Shells;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace CrabAssets.Scripts.Game
 {
@@ -65,6 +64,12 @@ namespace CrabAssets.Scripts.Game
 
         }
 
+        private void OnDestroy()
+        {
+            liveTimeOut -= Kill;
+            radiationTimeOut -= RadiationTimeOut;
+        }
+
         private void RadiationTimeOut()
         {
             Player.Grow(radiationSizeIncrement);
@@ -96,10 +101,12 @@ namespace CrabAssets.Scripts.Game
         private void OnEnable()
         {
             GameTrigger.OnTriggerIn += OnTriggerIn;
+            GameTrigger.OnTriggerOut += OnTriggerOut;
         }
 
         private void OnDisable()
         {
+            GameTrigger.OnTriggerIn -= OnTriggerIn;
             GameTrigger.OnTriggerOut -= OnTriggerOut;
         }
 
