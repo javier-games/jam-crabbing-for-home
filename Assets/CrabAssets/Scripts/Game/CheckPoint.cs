@@ -10,8 +10,17 @@ namespace CrabAssets.Scripts.Game
         [SerializeField] 
         private Animator animator;
 
+        [SerializeField]
+        private bool activateRadiationTimer = true;
+        
+        [SerializeField] 
+        private bool activateLiveTimer = true;
+
         private static readonly int Check = Animator.StringToHash("Check");
         private static readonly int Reset = Animator.StringToHash("Reset");
+
+        public bool ActivateRadiationTimer => activateRadiationTimer;
+        public bool ActivateLiveTimer => activateLiveTimer;
 
         protected override bool DidEnter(Collider2D other, out Component actor)
         {

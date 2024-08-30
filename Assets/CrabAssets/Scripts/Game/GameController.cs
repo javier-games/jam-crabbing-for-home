@@ -3,7 +3,7 @@ using CrabAssets.Scripts.Player;
 using CrabAssets.Scripts.Shells;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace CrabAssets.Scripts.Game
 {
@@ -28,13 +28,13 @@ namespace CrabAssets.Scripts.Game
         [SerializeField] 
         private float radiationSizeIncrement = 0.25f;
 
-        public static TimeInEvent liveTimeIn;
-        public static TimeOutEvent liveTimeOut;
-        public static TimerUpdateEvent liveTimeUpdate;
+        public static TimeInEvent LiveTimeIn;
+        public static TimeOutEvent LiveTimeOut;
+        public static TimerUpdateEvent LiveTimeUpdate;
 
-        public static TimeInEvent radiationTimeIn;
-        public static TimeOutEvent radiationTimeOut;
-        public static TimerUpdateEvent radiationTimeUpdate;
+        public static TimeInEvent RadiationTimeIn;
+        public static TimeOutEvent RadiationTimeOut;
+        public static TimerUpdateEvent RadiationTimeUpdate;
         
         private PlayerController Player { get; set; }
         private Timer LiveTimer { get; set; }
@@ -42,10 +42,10 @@ namespace CrabAssets.Scripts.Game
 
         private void Awake()
         {
-            liveTimeOut += Kill;
-            LiveTimer = new Timer(liveTime, liveTimeIn, liveTimeOut, liveTimeUpdate);
-            radiationTimeOut += RadiationTimeOut;
-            RadiationTimer = new Timer(radiationTime, radiationTimeIn, radiationTimeOut, radiationTimeUpdate);
+            LiveTimeOut += Kill;
+            LiveTimer = new Timer(liveTime, LiveTimeIn, LiveTimeOut, LiveTimeUpdate);
+            RadiationTimeOut += OnRadiationTimeOut;
+            RadiationTimer = new Timer(radiationTime, RadiationTimeIn, RadiationTimeOut, RadiationTimeUpdate);
             
             var inScenePlayer = FindObjectOfType<PlayerController>();
             
@@ -65,7 +65,13 @@ namespace CrabAssets.Scripts.Game
 
         }
 
-        private void RadiationTimeOut()
+        private void OnDestroy()
+        {
+            LiveTimeOut -= Kill;
+            RadiationTimeOut -= OnRadiationTimeOut;
+        }
+
+        private void OnRadiationTimeOut()
         {
             Player.Grow(radiationSizeIncrement);
             RadiationTimer.Stop(this);
@@ -77,7 +83,7 @@ namespace CrabAssets.Scripts.Game
             if (Player.HasShell)
             {
                 LiveTimer.Stop(this);
-                liveTimeUpdate?.Invoke(1);
+                LiveTimeUpdate?.Invoke(1);
             }
             else if (!LiveTimer.IsRunning) 
             {
@@ -100,7 +106,7 @@ namespace CrabAssets.Scripts.Game
 
         private void OnDisable()
         {
-            GameTrigger.OnTriggerOut -= OnTriggerOut;
+            GameTrigger.OnTriggerIn -= OnTriggerIn;
         }
 
         private void OnTriggerIn(GameTrigger trigger, Component _)
@@ -132,21 +138,13 @@ namespace CrabAssets.Scripts.Game
                     break;
                 }
 
-                case EndGameTrigger endGameTrigger:
+                case EndGameTrigger _:
                 {
+                    ClearPlayerPrefs();
                     StartCoroutine(LoadSceneCoroutine("EndScene"));
                     break;
                 }
             }
-        }
-
-        private void OnTriggerOut(GameTrigger trigger, Component actor)
-        {
-            // switch (trigger)
-            // {
-            //     case CheckPoint checkPoint:
-            //         break;
-            // }
         }
         
         private void Respawn()
@@ -168,16 +166,16 @@ namespace CrabAssets.Scripts.Game
                 }
             }
 
-            if ((object) checkPoint != null)
+            if (checkPoint != null)
             {
                 checkPoint.PlaceActor(Player.transform);
                 
-                if (!RadiationTimer.IsRunning)
+                if (checkPoint.ActivateRadiationTimer)
                 {
                     RadiationTimer.Start(this);
                 }
 
-                if (!LiveTimer.IsRunning)
+                if (checkPoint.ActivateLiveTimer)
                 {
                     LiveTimer.Start(this);
                 }
@@ -211,7 +209,6 @@ namespace CrabAssets.Scripts.Game
             RadiationTimer.Stop(this);
             LiveTimer.Stop(this);
             yield return new WaitForSeconds(3);
-            ClearPlayerPrefs();
             SceneManager.LoadScene(scene);
         }
     }

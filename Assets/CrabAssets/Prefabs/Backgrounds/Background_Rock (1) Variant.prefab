@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 3978236098179909948, guid: 4ec90c0b719cfff4eb17ee8d9c1eeab5,
         type: 3}
       propertyPath: m_Name
-      value: Background Rock (1)
+      value: Background_Rock (1) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6699823355433828562, guid: 4ec90c0b719cfff4eb17ee8d9c1eeab5,
         type: 3}
