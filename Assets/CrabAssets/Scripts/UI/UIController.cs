@@ -13,10 +13,10 @@ namespace CrabAssets.Scripts.UI
             liveTimer.enabled = false;
             radiationTimer.enabled = false;
             
-            GameController.liveTimeIn += LiveTimeIn;
-            GameController.liveTimeUpdate += LiveTimeUpdate;
-            GameController.radiationTimeIn += RadiationTimeIn;
-            GameController.radiationTimeUpdate += RadiationTimeUpdate;
+            GameController.LiveTimeIn += LiveTimeIn;
+            GameController.LiveTimeUpdate += LiveTimeUpdate;
+            GameController.RadiationTimeIn += RadiationTimeIn;
+            GameController.RadiationTimeUpdate += RadiationTimeUpdate;
         }
 
         private void RadiationTimeUpdate(float progress)
@@ -36,10 +36,10 @@ namespace CrabAssets.Scripts.UI
 
         private void OnDestroy()
         {
-            GameController.liveTimeIn -= LiveTimeIn;
-            GameController.liveTimeUpdate -= LiveTimeUpdate;
-            GameController.radiationTimeIn -= RadiationTimeIn;
-            GameController.radiationTimeUpdate -= RadiationTimeUpdate;
+            GameController.LiveTimeIn -= LiveTimeIn;
+            GameController.LiveTimeUpdate -= LiveTimeUpdate;
+            GameController.RadiationTimeIn -= RadiationTimeIn;
+            GameController.RadiationTimeUpdate -= RadiationTimeUpdate;
         }
 
         private void LiveTimeIn()
