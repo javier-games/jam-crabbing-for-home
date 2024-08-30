@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: UnderSeaPhase
   m_EditorClassIdentifier: 
   settings:
-  - {fileID: 114514200383457536}
   - {fileID: 114209999581552860}
   - {fileID: 114835312301837206}
-  - {fileID: 8461253837541713557}
 --- !u!114 &114209999581552860
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -69,16 +67,16 @@ MonoBehaviour:
     overrideState: 0
     value: 1
   temperature:
-    overrideState: 1
+    overrideState: 0
     value: 8
   tint:
-    overrideState: 1
+    overrideState: 0
     value: -0
   colorFilter:
-    overrideState: 1
+    overrideState: 0
     value: {r: 0.6933962, g: 0.867578, b: 1, a: 1}
   hueShift:
-    overrideState: 1
+    overrideState: 0
     value: 0
   saturation:
     overrideState: 1
@@ -91,7 +89,7 @@ MonoBehaviour:
     value: 0
   contrast:
     overrideState: 1
-    value: 3
+    value: 8.5
   mixerRedOutRedIn:
     overrideState: 0
     value: 100
@@ -1328,50 +1326,6 @@ MonoBehaviour:
       - 0.5
       - 0.5
       - 0.5
---- !u!114 &114514200383457536
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b924e2dad56384a8df2a1e111bb675, type: 3}
-  m_Name: Vignette
-  m_EditorClassIdentifier: 
-  active: 1
-  enabled:
-    overrideState: 1
-    value: 1
-  mode:
-    overrideState: 0
-    value: 0
-  color:
-    overrideState: 1
-    value: {r: 0, g: 0, b: 0, a: 0.33333334}
-  center:
-    overrideState: 0
-    value: {x: 0.5, y: 0.5}
-  intensity:
-    overrideState: 1
-    value: 0.249
-  smoothness:
-    overrideState: 0
-    value: 0.2
-  roundness:
-    overrideState: 0
-    value: 1
-  rounded:
-    overrideState: 0
-    value: 0
-  mask:
-    overrideState: 0
-    value: {fileID: 0}
-    defaultState: 1
-  opacity:
-    overrideState: 0
-    value: 1
 --- !u!114 &114835312301837206
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1390,10 +1344,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.47
+    value: 0.3
   threshold:
     overrideState: 1
-    value: 0.3
+    value: 0.5
   softKnee:
     overrideState: 0
     value: 0.5
@@ -1419,31 +1373,3 @@ MonoBehaviour:
   dirtIntensity:
     overrideState: 0
     value: 0
---- !u!114 &8461253837541713557
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d65e486e4de6e5448a8fbb43dc8756a0, type: 3}
-  m_Name: Grain
-  m_EditorClassIdentifier: 
-  active: 0
-  enabled:
-    overrideState: 1
-    value: 1
-  colored:
-    overrideState: 1
-    value: 1
-  intensity:
-    overrideState: 1
-    value: 0.176
-  size:
-    overrideState: 1
-    value: 1
-  lumContrib:
-    overrideState: 0
-    value: 0.8
