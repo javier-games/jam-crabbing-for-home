@@ -9,7 +9,7 @@ namespace CrabAssets.Scripts.UI
         private Animator animator;
         
         [SerializeField] 
-        private Slider slider;
+        private Image imageFill;
         
         
         private static readonly int Active = Animator.StringToHash("Active");
@@ -17,12 +17,12 @@ namespace CrabAssets.Scripts.UI
         
         public float RadiationAmount
         {
-            get => 1 - slider.value;
+            get => 1 - imageFill.fillAmount;
 
             set
             {
-                slider.value = 1 - value;
-                animator.SetFloat(Radiation, slider.value);
+                imageFill.fillAmount = 1 - value;
+                animator.SetFloat(Radiation, imageFill.fillAmount);
             }
         }
 

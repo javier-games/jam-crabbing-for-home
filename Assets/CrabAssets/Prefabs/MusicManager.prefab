@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7095046406282383466
 Transform:
   m_ObjectHideFlags: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7095046406282383467}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 117.84, y: -82, z: 0}
+  m_LocalPosition: {x: 166.4, y: -75.5, z: 0}
   m_LocalScale: {x: 10.49652, y: 5.701349, z: 1}
   m_Children: []
   m_Father: {fileID: 7095046406711375279}
@@ -45,7 +45,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.42961925, y: 0.6648969}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -56,7 +56,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.1407615, y: 2.3297935}
   m_EdgeRadius: 0
 --- !u!114 &7095046406282383477
 MonoBehaviour:
@@ -70,8 +70,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7699713b8fa004e9e4cd1ca908c1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundIndex: 5
-  musicaManager: {fileID: 7095046406711375278}
+  soundIndex: 1
+  musicManager: {fileID: 7095046406711375278}
 --- !u!1 &7095046406315915981
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +98,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7095046406315915981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.84, y: -0.47, z: 0}
+  m_LocalPosition: {x: -18.7, y: 2.65, z: 0}
   m_LocalScale: {x: 1.9438, y: 5.701349, z: 1}
   m_Children: []
   m_Father: {fileID: 7095046406711375279}
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundIndex: 8
-  musicaManager: {fileID: 7095046406711375278}
+  musicManager: {fileID: 7095046406711375278}
 --- !u!1 &7095046406451257986
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +170,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7095046406451257986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.7, y: -3.88, z: 0}
+  m_LocalPosition: {x: 46.95, y: -2.19, z: 0}
   m_LocalScale: {x: 1.9438, y: 5.701349, z: 1}
   m_Children: []
   m_Father: {fileID: 7095046406711375279}
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundIndex: 5
-  musicaManager: {fileID: 7095046406711375278}
+  musicManager: {fileID: 7095046406711375278}
 --- !u!1 &7095046406513602469
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7095046406513602468
 Transform:
   m_ObjectHideFlags: 0
@@ -242,7 +242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7095046406513602469}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 146.11, y: -75.56, z: 0}
+  m_LocalPosition: {x: 194.46, y: -74.17, z: 0}
   m_LocalScale: {x: 10.49652, y: 5.701349, z: 1}
   m_Children: []
   m_Father: {fileID: 7095046406711375279}
@@ -272,7 +272,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.2844875, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &7095046406513602471
 MonoBehaviour:
@@ -286,8 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7699713b8fa004e9e4cd1ca908c1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundIndex: 3
-  musicaManager: {fileID: 7095046406711375278}
+  soundIndex: 2
+  musicManager: {fileID: 7095046406711375278}
 --- !u!1 &7095046406711375276
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7095046406711375279
 Transform:
   m_ObjectHideFlags: 0
@@ -313,7 +313,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7095046406711375276}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -362,7 +362,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 27f70b5bb568e7843a25f74e19e54792, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -464,7 +464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7095046406729625686
 Transform:
   m_ObjectHideFlags: 0
@@ -473,7 +473,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7095046406729625687}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 253.4, y: -74.57, z: 0}
+  m_LocalPosition: {x: 290.7, y: -81.2, z: 0}
   m_LocalScale: {x: 10.49652, y: 5.701349, z: 1}
   m_Children: []
   m_Father: {fileID: 7095046406711375279}
@@ -486,7 +486,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7095046406729625687}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundIndex: 2
-  musicaManager: {fileID: 7095046406711375278}
+  musicManager: {fileID: 7095046406711375278}
 --- !u!1 &7095046407261387796
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,7 +545,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7095046407261387796}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 198.81, y: -74.57, z: 0}
+  m_LocalPosition: {x: 231.25, y: -74.16, z: 0}
   m_LocalScale: {x: 10.49652, y: 5.701349, z: 1}
   m_Children: []
   m_Father: {fileID: 7095046406711375279}
@@ -589,8 +589,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7699713b8fa004e9e4cd1ca908c1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundIndex: 1
-  musicaManager: {fileID: 7095046406711375278}
+  soundIndex: 4
+  musicManager: {fileID: 7095046406711375278}
 --- !u!1 &7095046407431094544
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,7 +617,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7095046407431094544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 58.98, y: -8.9, z: 0}
+  m_LocalPosition: {x: 105.18, y: -19.53, z: 0}
   m_LocalScale: {x: 1.9438, y: 5.701349, z: 1}
   m_Children: []
   m_Father: {fileID: 7095046406711375279}
@@ -636,7 +636,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.11827123, y: -0.25089455}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -647,7 +647,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.0762851, y: 0.4982109}
   m_EdgeRadius: 0
 --- !u!114 &7095046407431094546
 MonoBehaviour:
@@ -662,7 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundIndex: 4
-  musicaManager: {fileID: 7095046406711375278}
+  musicManager: {fileID: 7095046406711375278}
 --- !u!1 &7095046408016978741
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,7 +689,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7095046408016978741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 94.1, y: -82, z: 0}
+  m_LocalPosition: {x: 110.71, y: -81.16, z: 0}
   m_LocalScale: {x: 10.49652, y: 5.701349, z: 1}
   m_Children: []
   m_Father: {fileID: 7095046406711375279}
@@ -708,7 +708,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0066805854, y: -0.3239019}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -719,7 +719,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.483337, y: 0.35219622}
   m_EdgeRadius: 0
 --- !u!114 &7095046408016978743
 MonoBehaviour:
@@ -734,4 +734,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundIndex: 6
-  musicaManager: {fileID: 7095046406711375278}
+  musicManager: {fileID: 7095046406711375278}

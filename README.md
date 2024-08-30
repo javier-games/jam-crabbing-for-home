@@ -45,7 +45,7 @@ to the deadly environment.
   <img src="docs/crabbing-for-home-shell-destroyed-auto-growing.gif"/>
 </p>
 
-# Timed Life and Radiation
+### Timed Life and Radiation
 
 Survival in this harsh world is a constant race against time. Hermit has two timers working against it and eating
 plankton could affect its radiation for bad or for good.
@@ -70,10 +70,11 @@ a new home quickly to avoid perishing.
 
 # Requirements
 
-- [Unity 2017.1.1f1](https://unity.com/releases/editor/whats-new/2017.1.1#installs)
+- [Unity 2021.1.23f1](https://unity.com/releases/editor/whats-new/2021.1.23#notes).
 
-> This project was created originally created using the version [2018.3.3f1](https://unity.com/releases/editor/whats-new/2018.3.3#notes)
-> of Unity and in order to make it accessible to newer versions was updated to [2021.1.23f1](https://unity.com/releases/editor/whats-new/2021.1.23#notes).
+> This project was originally created using the Unity version [2018.3.3f1](https://unity.com/releases/editor/whats-new/2018.3.3#notes)
+> and in order to make it accessible to newer versions was updated in 2021 to the [2021.1.23f1](https://unity.com/releases/editor/whats-new/2021.1.23#notes)
+> version.
 
 # Project Installation
 

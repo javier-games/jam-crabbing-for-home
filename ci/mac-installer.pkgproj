@@ -19,7 +19,36 @@
 					<array>
 						<dict>
 							<key>CHILDREN</key>
-							<array/>
+							<array>
+								<dict>
+									<key>BUNDLE_CAN_DOWNGRADE</key>
+									<false/>
+									<key>BUNDLE_POSTINSTALL_PATH</key>
+									<dict>
+										<key>PATH_TYPE</key>
+										<integer>0</integer>
+									</dict>
+									<key>BUNDLE_PREINSTALL_PATH</key>
+									<dict>
+										<key>PATH_TYPE</key>
+										<integer>0</integer>
+									</dict>
+									<key>CHILDREN</key>
+									<array/>
+									<key>GID</key>
+									<integer>80</integer>
+									<key>PATH</key>
+									<string>../Builds/Crabbing for Home.app</string>
+									<key>PATH_TYPE</key>
+									<integer>1</integer>
+									<key>PERMISSIONS</key>
+									<integer>493</integer>
+									<key>TYPE</key>
+									<integer>3</integer>
+									<key>UID</key>
+									<integer>0</integer>
+								</dict>
+							</array>
 							<key>GID</key>
 							<integer>80</integer>
 							<key>PATH</key>
@@ -30,34 +59,6 @@
 							<integer>509</integer>
 							<key>TYPE</key>
 							<integer>1</integer>
-							<key>UID</key>
-							<integer>0</integer>
-						</dict>
-						<dict>
-							<key>BUNDLE_CAN_DOWNGRADE</key>
-							<false/>
-							<key>BUNDLE_POSTINSTALL_PATH</key>
-							<dict>
-								<key>PATH_TYPE</key>
-								<integer>0</integer>
-							</dict>
-							<key>BUNDLE_PREINSTALL_PATH</key>
-							<dict>
-								<key>PATH_TYPE</key>
-								<integer>0</integer>
-							</dict>
-							<key>CHILDREN</key>
-							<array/>
-							<key>GID</key>
-							<integer>0</integer>
-							<key>PATH</key>
-							<string>../Builds/Creabbing for Home.app</string>
-							<key>PATH_TYPE</key>
-							<integer>1</integer>
-							<key>PERMISSIONS</key>
-							<integer>511</integer>
-							<key>TYPE</key>
-							<integer>3</integer>
 							<key>UID</key>
 							<integer>0</integer>
 						</dict>
@@ -906,7 +907,7 @@
 				</dict>
 			</array>
 			<key>NAME</key>
-			<string>crabbing-for-home-1.0.0-alpha.1-installer</string>
+			<string>crabbing-for-home-1.0.0-alpha.2-installer</string>
 			<key>PAYLOAD_ONLY</key>
 			<false/>
 			<key>TREAT_MISSING_PRESENTATION_DOCUMENTS_AS_WARNING</key>
